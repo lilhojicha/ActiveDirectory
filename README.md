@@ -62,6 +62,86 @@ Go to file explorer and click on 'This PC' -> 'CD Drive (D:) VirtualBox Guest Ad
 <img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
 <br />
 <br />
+#1 right click either one of the Ethernet options and select 'Status'. You will then get to the #2 window and click on 'Details'. Check the Autoconfiguration IPv4 and find the one with the 169.254.xxx.x. This one is your internal network. Go ahead and rename that network as INTERNAL_NETWORK and the other one as INTERNET: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
+ Go ahead and just click next until you get to the completing screen and choose to manually reboot later: <br/>
+<img src="https://i.imgur.com/7vuwBXu.png" height="80%" width="80%" alt="Setting Up Your Environment"/>
+<br />
+<br />
 </p>
 
 <!--
