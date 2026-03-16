@@ -29,10 +29,10 @@ This active directory homelab is to understand the fundamentals in Active Direct
 
 
 ## Network Topology Map
+![Screenshot 1]
 
 
-
-<h2>Environments Used and Links to Download</h2>
+## Environments Used and Links to Download
 
 - [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO) (21H2)
 - [Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
