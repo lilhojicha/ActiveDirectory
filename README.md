@@ -1,15 +1,34 @@
 # ActiveDirectory
-This is an Active Directory home lab Environment to learn about active directory using Oracle Virtual Box. I have posted a walk through for anyone who wants to also learn how to create the home lab to understand how active directory and networking works.
+This active directory homelab is to understand the fundamentals in Active Directory, networking, and IT by promoteing a server to a domain controller, build a basic Active Driectory structure, create users and groups, and test authentictaion using both GUI and Powershell
 
- ### [YouTube Demonstration]
+
  
-<h2>Description</h2>
-This homelab is to understand the fundamentals in Active Directory, networking, and IT. I will provide steps on how to set up your homelab with a 2019 Windows server with Windows 10 clients in Oracle Virtual box. 
-If you are learning and planning on building this homelab I recommend looking at the network topology and understand some of the concepts so that you have a better understanding of each step of the process.
-<br />
+## What I have learned
+- Deploying a Windows Server VM in Oracle
+- Installing Active Directory Domain Services (AD DS)
+- Promoting a server to a domain controller
+- Designing a simple, logical OU structure
+- Creating and manage users and security groups
+- Understanding how group membership controls access
+- Authenticating users from a Windows client
+- Performing common AD tasks via GUI and Powershell
+- Troubleshooting basic Active Directory issues
+
+## Technologies and Components Used:
+-	Windows Server 2019
+-	Windows 10 Pro
+-	Oracle VirtualBox
+-	Active Directory
+-	Active Directory Domain Service
+-	Network Address Translation (NAT)
+-	Domain Name Service (DNS)
+-	Dynamic Host Configuration Protocol (DHCP)
+-	File and Storage Services
+-	Internet Information Services (IIS)
+-	PowerShell
 
 
-<h2>Network Topology Map</h2>
+## Network Topology Map
 
 
 
