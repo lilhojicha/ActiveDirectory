@@ -38,11 +38,17 @@ This active directory homelab is to understand the fundamentals in Active Direct
 - [Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Windows Server 2019 | Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019)
 
-### Installed Roles and Features
-## Active Directory Domain Services was installed because this is the ...
-## Promoted the Server to a Domain Controller and created my first Active Directory domain called "mydomain"
-    This is the point where Active Directory actually becomes active.
-## Created Organizational Units (OU) that mirrors how Active Directory is commonly structured in production enviroments by creating location-based OUs.
+## Windows Server 2019 and Active Directory
+Installed Roles and Features
+(input picture here)
+
+Active Directory Domain Services was installed because this is the ...
+
+### Promoted the Server to a DC
+Promoted the Server to a Domain Controller and created my first Active Directory domain called "mydomain"
+This is the point where Active Directory actually becomes active.
+
+### Created Organizational Units (OU) that mirrors how Active Directory is commonly structured in production enviroments by creating location-based OUs.
 - OUs are designed around **policy and delegation boundaries** thus, creating location-based OUs
 - The structure looks like this 
 ```
@@ -52,7 +58,7 @@ _Branches
      ├── Workstations
      └── Laptops
 ```
-## Created Users
+### Created Users
 Here I have created domain user accounts and placed them into the appropriate branch-based Users OU
 
 The users I have created are
@@ -63,7 +69,7 @@ The users I have created are
 
 The PowerShell Equivalent is 
 
-```
+``` PowerShell
 $ou = "OU=Users,OU=Las_Vegas,OU=_Branches,DC=mydomain"
 
 New-ADUser -Name "Alice Johnson" -GivenName Alice -Surname Johnson -SamAccountName ajohnson -Path $ou -AccountPassword (Read-Host -AsSecureString) -Enabled $true
@@ -82,7 +88,7 @@ The PowerShell script to add 1000 users
 - Access is granted through group membership, not OU placement
 - Password and lockout policies are engorced with Group Policy
 
-## Created Security Groups
+### Created Security Groups
 
 Security Groups that were created users that were assigned
 - HR - John Davidson
@@ -102,7 +108,7 @@ These groups are global security groups to represent roles or departments within
 
 
 The PowerShell Equivalent
-```
+``` PowerShell
 $groupsOU = "OU=_Groups,DC=mydomain"
 
 New-ADGroup -Name "Helpdesk" -GroupScope Global -GroupCategory Security -Path $groupsOU
