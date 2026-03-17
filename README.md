@@ -54,11 +54,12 @@ _Branches
 ```
 ## Created Users
 Here I have created domain user accounts and placed them into the appropriate branch-based Users OU
+
 The users I have created are
-- HR - John Davidson
-- Helpdesk - Alice johnson
-- Accounting - Bob martinez
-- ITSupport - Chris walker
+- John Davidson (ajohnson)
+- Alice johnson (jdavidson)
+- Bob martinez (bmartinez)
+- Chris walker (cwalker)
 
 The PowerShell Equivalent is 
 
@@ -73,12 +74,52 @@ New-ADUser -Name "Bob Martinez" -GivenName Bob -Surname Martinez -SamAccountName
 
 New-ADUser -Name "Chris Walker" -GivenName Chris -Surname Walker -SamAccountName cwalker -Path $ou -AccountPassword (Read-Host -AsSecureString) -Enabled $true
 ```
+The PowerShell script to add 1000 users
+
+
 **Important Notes**
 - Users should always be placed in the correct branch OU
 - Access is granted through group membership, not OU placement
 - Password and lockout policies are engorced with Group Policy
 
 ## Created Security Groups
+
+Security Groups that were created users that were assigned
+- HR - John Davidson
+- Helpdesk - Alice johnson
+- Accounting - Bob martinez
+- ITSupport - Chris walker
+
+Unlike users and computers, groups are typically stored in a centralized location rather than inside branch OUs and in this case we stored the groups in the _Groups OU 
+```
+_Groups
+ ├── Helpdesk
+ ├── ITSupport
+ ├── HR
+ └── Accounting
+```
+These groups are global security groups to represent roles or departments within the domain
+
+
+The PowerShell Equivalent
+```
+$groupsOU = "OU=_Groups,DC=mydomain"
+
+New-ADGroup -Name "Helpdesk" -GroupScope Global -GroupCategory Security -Path $groupsOU
+New-ADGroup -Name "ITSupport" -GroupScope Global -GroupCategory Security -Path $groupsOU
+New-ADGroup -Name "HR" -GroupScope Global -GroupCategory Security -Path $groupsOU
+New-ADGroup -Name "Accounting" -GroupScope Global -GroupCategory Security -Path $groupsOU
+
+Add-ADGroupMember -Identity "Helpdesk" -Members ajohnson
+Add-ADGroupMember -Identity "ITSupport" -Members cwalker
+Add-ADGroupMember -Identity "HR" -Members jdavidson
+Add-ADGroupMember -Identity "Accounting" -Members bmartinez
+```
+
+**Important Notes**
+- Users never get permissions assigned directly. They acquire access through their roles
+- Groups are typically centralized, not branch-based
+
 
 
 
