@@ -29,7 +29,7 @@ This active directory homelab is to understand the fundamentals in Active Direct
 
 
 ## Network Topology Map 🌐
-![Screenshot 1]
+![Network Topology](https://github.com/lilhojicha/ActiveDirectory/screenshots/network_Topology.png)
 
 
 ## Environments Used and Links to Download
