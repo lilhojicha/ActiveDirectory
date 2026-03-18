@@ -3,7 +3,7 @@ This active directory homelab is to understand the fundamentals in Active Direct
 
 
  
-## What I have learned
+## What I have learned 📝
 - Deploying a Windows Server VM in Oracle
 - Installing Active Directory Domain Services (AD DS)
 - Promoting a server to a domain controller
@@ -28,7 +28,7 @@ This active directory homelab is to understand the fundamentals in Active Direct
 -	PowerShell
 
 
-## Network Topology Map
+## Network Topology Map 🌐
 ![Screenshot 1]
 
 
@@ -38,7 +38,7 @@ This active directory homelab is to understand the fundamentals in Active Direct
 - [Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Windows Server 2019 | Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019)
 
-## Windows Server 2019 and Active Directory
+## Windows Server 2019 and Active Directory 🪟
 Installed Roles and Features
 (input picture here)
 
@@ -83,7 +83,7 @@ New-ADUser -Name "Chris Walker" -GivenName Chris -Surname Walker -SamAccountName
 The PowerShell script to add 1000 users
 
 
-**Important Notes**
+**‼️Important Notes‼️**
 - Users should always be placed in the correct branch OU
 - Access is granted through group membership, not OU placement
 - Password and lockout policies are engorced with Group Policy
@@ -108,6 +108,7 @@ These groups are global security groups to represent roles or departments within
 
 
 The PowerShell Equivalent
+
 ``` PowerShell
 $groupsOU = "OU=_Groups,DC=mydomain"
 
@@ -122,13 +123,25 @@ Add-ADGroupMember -Identity "HR" -Members jdavidson
 Add-ADGroupMember -Identity "Accounting" -Members bmartinez
 ```
 
-**Important Notes**
-- Users never get permissions assigned directly. They acquire access through their roles
+**‼️Important Notes‼️**
+- Users almost never get permissions assigned directly. They acquire access through their roles by being placed in a group, and groups are granted access to resources.
 - Groups are typically centralized, not branch-based
 
+### Created a Windows Client VM and Joined the Domain
 
+**‼️Important Notes‼️**
+- Client must use the domain controller for DNS resolution
+- Active Directory relies entirely on DNS to locate domain controllers. Incorrect DNS is the most common cause of domain join failures.
+- So you have to set the DNS to the domain controller's private IP 
 
+I then verified that Active Directory is working correctly by logging into the client as a domain user
+    A successful domain login proves that the client can locate a domain controller, authenticate the user, build a security token, and apply group membership
 
+### Real-world Active Directory Responsibilities
+1. Configured Password Policy (Domain-Wide)
+2. Create a Basic Logon Script
+3. Delegate Password Reset Permissions to Helpdesk
+4. Move the Client Computer into the correct Branch OU
 
 
 
