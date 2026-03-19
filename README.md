@@ -40,7 +40,7 @@ This active directory homelab is to understand the fundamentals in Active Direct
 
 ## Windows Server 2019 and Active Directory 🪟
 Installed Roles and Features
-(input picture here)
+![AD roles and features](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Roles_and_features.png)
 
 Active Directory Domain Services was installed because this is the ...
 
@@ -52,12 +52,15 @@ This is the point where Active Directory actually becomes active.
 - OUs are designed around **policy and delegation boundaries** thus, creating location-based OUs
 - The structure looks like this 
 ```
-_Branches
+OU_Branches
  └── Las_Vegas
      ├── Users
      ├── Workstations
      └── Laptops
 ```
+
+![OU_Branches](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/OU_Branches.png)
+
 ### Created Users
 Here I have created domain user accounts and placed them into the appropriate branch-based Users OU
 
@@ -66,6 +69,8 @@ The users I have created are
 - Alice johnson (jdavidson)
 - Bob martinez (bmartinez)
 - Chris walker (cwalker)
+
+![Users](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Users.png)
 
 The PowerShell Equivalent is 
 
@@ -80,8 +85,6 @@ New-ADUser -Name "Bob Martinez" -GivenName Bob -Surname Martinez -SamAccountName
 
 New-ADUser -Name "Chris Walker" -GivenName Chris -Surname Walker -SamAccountName cwalker -Path $ou -AccountPassword (Read-Host -AsSecureString) -Enabled $true
 ```
-The PowerShell script to add 1000 users
-
 
 **‼️Important Notes‼️**
 - Users should always be placed in the correct branch OU
@@ -95,6 +98,8 @@ Security Groups that were created users that were assigned
 - Helpdesk - Alice johnson
 - Accounting - Bob martinez
 - ITSupport - Chris walker
+
+![Security_groups](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Security_groups.png)
 
 Unlike users and computers, groups are typically stored in a centralized location rather than inside branch OUs and in this case we stored the groups in the _Groups OU 
 ```
@@ -129,6 +134,8 @@ Add-ADGroupMember -Identity "Accounting" -Members bmartinez
 
 ### Created a Windows Client VM and Joined the Domain
 
+![client_computer](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/client_computer.png)
+
 **‼️Important Notes‼️**
 - Client must use the domain controller for DNS resolution
 - Active Directory relies entirely on DNS to locate domain controllers. Incorrect DNS is the most common cause of domain join failures.
@@ -139,9 +146,18 @@ I then verified that Active Directory is working correctly by logging into the c
 
 ### Real-world Active Directory Responsibilities
 1. Configured Password Policy (Domain-Wide)
+
+![Password Policy](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Password_Policy.png)
+
 2. Create a Basic Logon Script
+
+
+
 3. Delegate Password Reset Permissions to Helpdesk
-4. Move the Client Computer into the correct Branch OU
+
+![Delegation2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation1.png)
+
+![Delegation1](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation2.png)
 
 
 
