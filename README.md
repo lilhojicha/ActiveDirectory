@@ -51,13 +51,13 @@ This is the point where Active Directory actually becomes active.
 ### Created Organizational Units (OU) that mirrors how Active Directory is commonly structured in production enviroments by creating location-based OUs.
 - OUs are designed around **policy and delegation boundaries** thus, creating location-based OUs
 - The structure looks like this 
-```
-OU_Branches
- └── Las_Vegas
-     ├── Users
-     ├── Workstations
-     └── Laptops
-```
+
+    OU_Branches
+    └── Las_Vegas
+        ├── Users
+        ├── Workstations
+        └── Laptops
+
 
 ![OU_Branches](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/OU_Branches.png)
 
@@ -75,7 +75,7 @@ The users I have created are
 The PowerShell Equivalent is 
 
 ``` PowerShell
-$ou = "OU=Users,OU=Las_Vegas,OU=_Branches,DC=mydomain"
+$ou = "OU=Users,OU=Las_Vegas,OU=OU_Branches,DC=mydomain,DC=com"
 
 New-ADUser -Name "Alice Johnson" -GivenName Alice -Surname Johnson -SamAccountName ajohnson -Path $ou -AccountPassword (Read-Host -AsSecureString) -Enabled $true
 
@@ -93,7 +93,7 @@ New-ADUser -Name "Chris Walker" -GivenName Chris -Surname Walker -SamAccountName
 
 ### Created Security Groups
 
-Security Groups that were created users that were assigned
+Security Groups that were created and users that were assigned
 - HR - John Davidson
 - Helpdesk - Alice johnson
 - Accounting - Bob martinez
@@ -102,20 +102,20 @@ Security Groups that were created users that were assigned
 ![Security_groups](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Security_groups.png)
 
 Unlike users and computers, groups are typically stored in a centralized location rather than inside branch OUs and in this case we stored the groups in the _Groups OU 
-```
-_Groups
- ├── Helpdesk
- ├── ITSupport
- ├── HR
- └── Accounting
-```
+
+    _Groups
+    ├── Helpdesk
+    ├── ITSupport
+    ├── HR
+    └── Accounting
+
 These groups are global security groups to represent roles or departments within the domain
 
 
 The PowerShell Equivalent
 
 ``` PowerShell
-$groupsOU = "OU=_Groups,DC=mydomain"
+$groupsOU = "OU=OU_Groups,DC=mydomain,DC=com"
 
 New-ADGroup -Name "Helpdesk" -GroupScope Global -GroupCategory Security -Path $groupsOU
 New-ADGroup -Name "ITSupport" -GroupScope Global -GroupCategory Security -Path $groupsOU
@@ -134,6 +134,8 @@ Add-ADGroupMember -Identity "Accounting" -Members bmartinez
 
 ### Created a Windows Client VM and Joined the Domain
 
+I have also moved it to the correct branch OU
+
 ![client_computer](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/client_computer.png)
 
 **‼️Important Notes‼️**
@@ -144,16 +146,61 @@ Add-ADGroupMember -Identity "Accounting" -Members bmartinez
 I then verified that Active Directory is working correctly by logging into the client as a domain user
     A successful domain login proves that the client can locate a domain controller, authenticate the user, build a security token, and apply group membership
 
-### Real-world Active Directory Responsibilities
-1. Configured Password Policy (Domain-Wide)
+## Real-world Active Directory Responsibilities
+### 1. Configured Password Policy (Domain-Wide)
 
-![Password Policy](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Password_Policy.png)
+![Password Policy](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Password_policy.png)
 
-2. Create a Basic Logon Script
+## 2. Created a Basic Logon Script
+
+I have created two logon scripts that represent the real world.
+It uses SYSVOL which is a special folder on every domain controller that stores files which must be accessible to all domain users and when the user logs in, their computer automatically pulls scripts and policies from SYSVOL
+
+### Drive Mapping
+
+Before writing a script, it's important to create a shared folder to then map a drive to that folder where your domain users can access
+
+Here, I have created a shared folder called DeptShare where I have shared the folder permissions to add Domain Users -> Read and set NTFS permissions to let the group Accounting to have Modify and Read permissions.
+
+    1. Drive Mapping Script
+``` Powershell
+# Map-Drives.ps1
+$DriveLetter = "H"
+$SharePath = "\\DC\DeptShare"
+$LogFile = "$env:USERPROFILE\logon_log.txt"
 
 
+# Check if drive exists
+if (!(Get-PSDrive -Name $DriveLetter -ErrorAction SilentlyContinue)) {
+New-PSDrive -Name $DriveLetter -PSProvider FileSystem -Root $SharePath -Persist
 
-3. Delegate Password Reset Permissions to Helpdesk
+Add-Content -Path $LogFile -Value "$(Get-Date) - Mapped $DriveLetter to $SharePath"
+} else {
+Add-Content -Path $LogFile -Value "$(Get-Date) - $DriveLetter already mapped"
+}
+
+```
+
+    2. User Environment Prep Script
+``` Powershell
+# Create folders
+$Folders = @("Documents\Projects", "Documents\Tickets", "Desktop\Tools")
+foreach ($f in $Folders) {
+    New-Item -ItemType Directory -Path "$env:USERPROFILE\$f" -Force
+}
+
+# Create a desktop shortcut
+$WshShell = New-Object -ComObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$env:USERPROFILE\Desktop\Support Portal.lnk")
+$Shortcut.TargetPath = "https://intranet/helpdesk"
+$Shortcut.Save()
+
+# Log
+Add-Content "$env:USERPROFILE\logon_log.txt" "$(Get-Date) - Environment prepared"
+
+```
+
+3. Delegated Password Reset Permissions to Helpdesk
 
 ![Delegation2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation1.png)
 
