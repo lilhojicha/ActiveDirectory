@@ -115,13 +115,19 @@ These groups are global security groups to represent roles or departments within
 The PowerShell Equivalent
 
 ``` PowerShell
-$groupsOU = "OU=OU_Groups,DC=mydomain,DC=com"
+$path = "DC=mydomain,DC=com"
+$groupsOU = "OU=_Groups,DC=mydomain,DC=com"
 
+# Creates the _Groups OU first to then add the security groups later
+New-ADOrganizationalUnit -Name "_Groups" -ProtectedFromAccidentalDeletion $False -Path $path
+
+# Add new security groups with global scope
 New-ADGroup -Name "Helpdesk" -GroupScope Global -GroupCategory Security -Path $groupsOU
 New-ADGroup -Name "ITSupport" -GroupScope Global -GroupCategory Security -Path $groupsOU
 New-ADGroup -Name "HR" -GroupScope Global -GroupCategory Security -Path $groupsOU
 New-ADGroup -Name "Accounting" -GroupScope Global -GroupCategory Security -Path $groupsOU
 
+# Add members to these security groups
 Add-ADGroupMember -Identity "Helpdesk" -Members ajohnson
 Add-ADGroupMember -Identity "ITSupport" -Members cwalker
 Add-ADGroupMember -Identity "HR" -Members jdavidson
@@ -162,43 +168,35 @@ Before writing a script, it's important to create a shared folder to then map a 
 
 Here, I have created a shared folder called DeptShare where I have shared the folder permissions to add Domain Users -> Read and set NTFS permissions to let the group Accounting to have Modify and Read permissions.
 
-    1. Drive Mapping Script
+    Drive Mapping Script
 ``` Powershell
 # Map-Drives.ps1
 $DriveLetter = "H"
 $SharePath = "\\DC\DeptShare"
-$LogFile = "$env:USERPROFILE\logon_log.txt"
+$existingDrive = Get-PSDrive -Name $DriveLetter -ErrorAction SilentlyContinue
 
 
 # Check if drive exists
-if (!(Get-PSDrive -Name $DriveLetter -ErrorAction SilentlyContinue)) {
-New-PSDrive -Name $DriveLetter -PSProvider FileSystem -Root $SharePath -Persist
+if (!$existingDrive) {
+    New-PSDrive `
+        -Name $DriveLetter `
+        -PSProvider FileSystem `
+        -Root $SharePath `
+        -Persist
 
-Add-Content -Path $LogFile -Value "$(Get-Date) - Mapped $DriveLetter to $SharePath"
+    Write-Host "Drive $DriveLetter mapped to $NetworkPath successfully." `
+    -ForegroundColor Green
 } else {
-Add-Content -Path $LogFile -Value "$(Get-Date) - $DriveLetter already mapped"
+    Write-Host `
+        "Drive $DriveLetter is already mapped to $($existingDrive.Root)." `
+        -ForegroundColor Yellow
 }
 
 ```
 
-    2. User Environment Prep Script
-``` Powershell
-# Create folders
-$Folders = @("Documents\Projects", "Documents\Tickets", "Desktop\Tools")
-foreach ($f in $Folders) {
-    New-Item -ItemType Directory -Path "$env:USERPROFILE\$f" -Force
-}
+![map_drives](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives.png)
 
-# Create a desktop shortcut
-$WshShell = New-Object -ComObject WScript.Shell
-$Shortcut = $WshShell.CreateShortcut("$env:USERPROFILE\Desktop\Support Portal.lnk")
-$Shortcut.TargetPath = "https://intranet/helpdesk"
-$Shortcut.Save()
 
-# Log
-Add-Content "$env:USERPROFILE\logon_log.txt" "$(Get-Date) - Environment prepared"
-
-```
 
 3. Delegated Password Reset Permissions to Helpdesk
 
