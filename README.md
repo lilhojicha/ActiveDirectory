@@ -180,7 +180,6 @@ Configured a domain-wide password policy using Group Policy.
 Created a PowerShell logon script stored in SYSVOL, ensuring availability to all domain users.
   
 ``` Powershell
-# Map-Drives.ps1
 $DriveLetter = "H"
 $SharePath = "\\DC\DeptShare"
 $existingDrive = Get-PSDrive -Name $DriveLetter -ErrorAction SilentlyContinue
@@ -194,8 +193,9 @@ if (!$existingDrive) {
         -Root $SharePath `
         -Persist
 
-    Write-Host "Drive $DriveLetter mapped to $NetworkPath successfully." `
-    -ForegroundColor Green
+    Write-Host `
+        "Drive $DriveLetter mapped to $SharePath successfully." `
+        -ForegroundColor Green
 } else {
     Write-Host `
         "Drive $DriveLetter is already mapped to $($existingDrive.Root)" `
@@ -208,7 +208,9 @@ if (!$existingDrive) {
 #### Group Policy Preference (Recommended)
 Also implemented drive mapping using Group Policy Preferences to improve reliability and troubleshooting.
 ![mapped1](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/mapped1.png)
-![mapped2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/mapped2.png)
+![mapped2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives3.png)
+![mapped3](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives4.png)
+![mapped4](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives5.png)
 
 
 ### File Share Security (NTFS vs Share Permissions)
