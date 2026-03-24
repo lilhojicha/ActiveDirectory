@@ -1,18 +1,6 @@
 # ActiveDirectory
-This active directory homelab is to understand the fundamentals in Active Directory, networking, and IT by promoteing a server to a domain controller, build a basic Active Driectory structure, create users and groups, and test authentictaion using both GUI and Powershell
+This active directory homelab is to understand the fundamentals in Active Directory, networking, and IT by promoteing a server to a domain controller, build a basic Active Driectory structure, create users and groups, test authentictaion using both GUI and Powershell, map drives, and create GPOs
 
-
- 
-## What I have learned 📝
-- Deploying a Windows Server VM in Oracle
-- Installing Active Directory Domain Services (AD DS)
-- Promoting a server to a domain controller
-- Designing a simple, logical OU structure
-- Creating and manage users and security groups
-- Understanding how group membership controls access
-- Authenticating users from a Windows client
-- Performing common AD tasks via GUI and Powershell
-- Troubleshooting basic Active Directory issues
 
 ## Technologies and Components Used:
 -	Windows Server 2019
@@ -42,21 +30,20 @@ This active directory homelab is to understand the fundamentals in Active Direct
 Installed Roles and Features
 ![AD roles and features](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Roles_and_features.png)
 
-Active Directory Domain Services was installed because this is the ...
 
 ### Promoted the Server to a DC
 Promoted the Server to a Domain Controller and created my first Active Directory domain called "mydomain"
 This is the point where Active Directory actually becomes active.
 
-### Created Organizational Units (OU) that mirrors how Active Directory is commonly structured in production enviroments by creating location-based OUs.
+### Created Organizational Units (OU)
 - OUs are designed around **policy and delegation boundaries** thus, creating location-based OUs
 - The structure looks like this 
 
-    OU_Branches
-    └── Las_Vegas
-        ├── Users
-        ├── Workstations
-        └── Laptops
+        OU_Branches
+        └── Las_Vegas
+            ├── Users
+            ├── Workstations
+            └── Laptops
 
 
 ![OU_Branches](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/OU_Branches.png)
@@ -109,9 +96,6 @@ Unlike users and computers, groups are typically stored in a centralized locatio
     ├── HR
     └── Accounting
 
-These groups are global security groups to represent roles or departments within the domain
-
-
 The PowerShell Equivalent
 
 ``` PowerShell
@@ -140,8 +124,6 @@ Add-ADGroupMember -Identity "Accounting" -Members bmartinez
 
 ### Created a Windows Client VM and Joined the Domain
 
-I have also moved it to the correct branch OU
-
 ![client_computer](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/client_computer.png)
 
 **‼️Important Notes‼️**
@@ -157,16 +139,14 @@ I then verified that Active Directory is working correctly by logging into the c
 
 ![Password Policy](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Password_policy.png)
 
-## 2. Created a Basic Logon Script
+## 2. Drive Mapping
 
-I have created two logon scripts that represent the real world.
+I have created a drive mapping logon script to represent the real world.
 It uses SYSVOL which is a special folder on every domain controller that stores files which must be accessible to all domain users and when the user logs in, their computer automatically pulls scripts and policies from SYSVOL
 
-### Drive Mapping
+### Using a logon script
 
-Before writing a script, it's important to create a shared folder to then map a drive to that folder where your domain users can access
-
-Here, I have created a shared folder called DeptShare where I have shared the folder permissions to add Domain Users -> Read and set NTFS permissions to let the group Accounting to have Modify and Read permissions.
+I have created a shared folder called DeptShare and will map the drive H: to that path
 
     Drive Mapping Script
 ``` Powershell
@@ -188,14 +168,24 @@ if (!$existingDrive) {
     -ForegroundColor Green
 } else {
     Write-Host `
-        "Drive $DriveLetter is already mapped to $($existingDrive.Root)." `
+        "Drive $DriveLetter is already mapped to $($existingDrive.Root)" `
         -ForegroundColor Yellow
 }
 
 ```
-
 ![map_drives](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives.png)
 
+However, since logon scripts can slow computers down and be hard to debug due to it failing silently, I have also included on how to drive maps with group policy.
+
+![mapped1](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/mapped1.png)
+![mapped2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/mapped2.png)
+
+
+### Created Branch Folders and used NTFS and Shared Permission
+
+**‼️Important Notes‼️**
+Share permissions are very limited and supports very few permission levels thus we make the share permissive, and let NTFS do the real security work
+NTFS are find-grained, supports inheritance, and is applied locally and over the network.
 
 
 3. Delegated Password Reset Permissions to Helpdesk
@@ -203,15 +193,3 @@ if (!$existingDrive) {
 ![Delegation2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation1.png)
 
 ![Delegation1](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation2.png)
-
-
-
-<!--
- ```diff
-- text in red
-+ text in green
-! text in orange
-# text in gray
-@@ text in purple (and bold)@@
-```
---!>
