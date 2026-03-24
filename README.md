@@ -208,7 +208,7 @@ if (!$existingDrive) {
 #### Group Policy Preference (Recommended)
 Also implemented drive mapping using Group Policy Preferences to improve reliability and troubleshooting.
 ![mapped1](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/mapped1.png)
-<img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives3.png" width="600">
+<img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives3.png" width="300">
 
 ![mapped2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives3.png)
 ![mapped3](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives4.png)
