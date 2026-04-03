@@ -103,6 +103,7 @@ New-ADUser -Name "Chris Walker" -GivenName Chris -Surname Walker -SamAccountName
 - Users are placed in the correct OU for policy targeting
 - Access is granted through **group membership**, not OU placement
 - Password and lockout policies are enforced via Group Policy
+- [Script that creates 1000 users](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_users.ps1)
 
 ## Security Groups Design (RBAC)
 ### Centralized Group Structure
