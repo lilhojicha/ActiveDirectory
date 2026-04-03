@@ -1,8 +1,7 @@
 # Active Directory Homelab (Enterprise Fundamentals)
 
-## Project Overview
-This project is a hands-on Active Directory homelab designed to demonstrate core enterprise identity, access management, and Windows infrastructure fundamentals. The environment simulates real-world administrative responsibilities, including domain creation, OU design, user and group management, authentication validation, Group Policy configuration, secure file sharing, and delegated administration.
-The lab was built to mirror how Active Directory is deployed and managed in production environments, with a strong emphasis on security best practices, scalability, and automation using PowerShell.
+## What I personally configured and tested
+I built a Windows Server 2019 domain controller and Windows 10 client in a virtual lab, created and organized OUs, provisioned users and security groups, applied password and drive-mapping policies, configured file share access with NTFS permissions, delegated password reset rights to a Helpdesk group, and validated domain logons and policy application from the client machine.
 
 
 ## What This Project Demonstrates
@@ -24,7 +23,6 @@ The lab was built to mirror how Active Directory is deployed and managed in prod
 -	DNS (Domain Name Service)
 -	DHCP (Dynamic Host Configuration Protocol)
 -	File and Storage Services
--	Internet Information Services (IIS)
 -	PowerShell
 
 
@@ -100,10 +98,10 @@ foreach($n in $locations){
 ### Domain Users
 Created domain user accounts and placed them into the appropriate branch-based Users OU.
 
-- John Davidson (ajohnson)
-- Alice johnson (jdavidson)
-- Bob martinez (bmartinez)
-- Chris walker (cwalker)
+- John Davidson (jdavidson)
+- Alice Johnson (ajohnson)
+- Bob Martinez (bmartinez)
+- Chris Walker (cwalker)
 
 ![Users](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Users.png)
 
@@ -123,7 +121,7 @@ New-ADUser -Name "Chris Walker" -GivenName Chris -Surname Walker -SamAccountName
 ```
 
 [PowerShell Script to create 1000 users](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_users.ps1)
-
+To practice bulk provisioning, I used PowerShell to import a name list and create a large test user set in a dedicated lab OU. A standard lab password was used only for initial testing in this isolated environment.
 ```PowerShell
 # stores each line to an array of newline-delimited strings
 $names = Get-Content -Path .\names.txt
@@ -266,6 +264,8 @@ Also implemented drive mapping using Group Policy Preferences to improve reliabi
 
 <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives4.png" width="500">
 
+Verified GPO application using gpupdate /force and confirmed mapped drive behavior after user logon
+
 <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives5.png" width="500">
 
 
@@ -287,11 +287,14 @@ Also implemented drive mapping using Group Policy Preferences to improve reliabi
 
 Delegated password reset permissions to the Helpdesk group using the Delegation of Control Wizard.
 
-![Delegation2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation1.png)
+![Delegation1](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation1.png)
 
-![Delegation1](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation2.png)
+![Delegation2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation2.png)
 
 This allows Helpdesk staff to perform common tasks without full administrative rights, following the **principle of least privilege**.
+
+Image below shows validated delegated password resets with non-admin Helpdesk user
+![Delegation3](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation3.png)
 
 
 ## Future Improvements
