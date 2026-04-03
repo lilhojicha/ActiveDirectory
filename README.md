@@ -249,7 +249,6 @@ This allows Helpdesk staff to perform common tasks without full administrative r
 - Implement Fine-Grained Password Policies (FGPP)
 - Add service accounts with scoped permissions
 - Centralize logging and auditing
-- Expand OU structure to multiple branches
 - Automate user onboarding with CSV-based PowerShell scripts
 
 ## Summary
