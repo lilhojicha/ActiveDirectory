@@ -72,6 +72,7 @@ This structure allows:
 - Targeted Group Policy application
 - Clean separation of users and devices
 - Scalable expansion to additional locations or departments
+- [Automated the creation of 20 branches with sub OUs with this script](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_location_OU.ps1)
 
 ## User Management
 ### Domain Users
@@ -99,11 +100,13 @@ New-ADUser -Name "Bob Martinez" -GivenName Bob -Surname Martinez -SamAccountName
 New-ADUser -Name "Chris Walker" -GivenName Chris -Surname Walker -SamAccountName cwalker -Path $ou -AccountPassword (Read-Host -AsSecureString) -Enabled $true
 ```
 
+[Automated the creation of 1000 users with this script](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_users.ps1)
+
 **‼️Key Notes‼️**
 - Users are placed in the correct OU for policy targeting
 - Access is granted through **group membership**, not OU placement
 - Password and lockout policies are enforced via Group Policy
-- [Script that creates 1000 users](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_users.ps1)
+
 
 ## Security Groups Design (RBAC)
 ### Centralized Group Structure
