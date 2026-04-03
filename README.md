@@ -89,8 +89,8 @@ foreach($n in $locations){
 
     # Creating the sub OUs for the branches
     foreach ($ou in $sub_ou) {
-        New-ADOrganizationalUnit    -Name $ou`
-                                    -ProtectedFromAccidentalDeletion $False`
+        New-ADOrganizationalUnit    -Name $ou `
+                                    -ProtectedFromAccidentalDeletion $False `
                                     -Path "OU=$n,$path"
     }
 }
