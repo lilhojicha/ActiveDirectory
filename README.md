@@ -37,7 +37,6 @@ The environment consists of a domain controller and a Windows client VM connecte
 ### Installation Media
 
 - [Windows 10](https://www.microsoft.com/en-us/software-download/windows10ISO) (21H2)
-- [Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Windows Server 2019 | Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/download-windows-server-2019)
 
 ## Active Directory Deployment 🪟
@@ -51,7 +50,7 @@ The server was configured with the required roles and features to support enterp
 - Created a new Active Directory domain: mydomain.com
 - Enabled DNS during promotion to support domain services
 
-This step activates Active Directory and establishes the authentication authority for the environment.
+I learned that this step activates Active Directory and establishes the authentication authority for the environment.
 
 ## Organizational Unit (OU) Design
 - OUs were designed around **policy application and administrative delegation**, following best practices used in enterprise environments.
@@ -120,8 +119,8 @@ New-ADUser -Name "Bob Martinez" -GivenName Bob -Surname Martinez -SamAccountName
 New-ADUser -Name "Chris Walker" -GivenName Chris -Surname Walker -SamAccountName cwalker -Path $ou -AccountPassword (Read-Host -AsSecureString) -Enabled $true
 ```
 
-[PowerShell Script to create 1000 users](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_users.ps1)
-To practice bulk provisioning, I used PowerShell to import a name list and create a large test user set in a dedicated lab OU. A standard lab password was used only for initial testing in this isolated environment.
+
+To practice bulk provisioning, I used [PowerShell Script](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_users.ps1) to import a name list and create a large test user set in a dedicated lab OU. A standard lab password was used only for initial testing in this isolated environment.
 ```PowerShell
 # stores each line to an array of newline-delimited strings
 $names = Get-Content -Path .\names.txt
@@ -149,8 +148,8 @@ foreach ($n in $names) {
 }
 ```
 
-**‼️Key Notes‼️**
-- Users are placed in the correct OU for policy targeting
+**‼️What I Learned‼️**
+- Users must be placed in the correct OU for policy targeting
 - Access is granted through **group membership**, not OU placement
 - Password and lockout policies are enforced via Group Policy
 
@@ -211,13 +210,12 @@ A Windows 10 client VM was joined to the domain.
 **Critical DNS Insight**
 - The client uses the domain controller as its DNS server
 - Active Directory relies entirely on DNS to locate domain controllers
-- Incorrect DNS configuration is the most common cause of domain join failures
+- Incorrect DNS configuration was the cause of my previous domain join failures
 
 Successful domain login verified:
 
 - DC discovery
 - User authentication
-- Security token creation
 - Group membership processing
 
 ## Real-world Active Directory Responsibilities
@@ -292,9 +290,6 @@ Delegated password reset permissions to the Helpdesk group using the Delegation 
 ![Delegation2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation2.png)
 
 This allows Helpdesk staff to perform common tasks without full administrative rights, following the **principle of least privilege**.
-
-Image below shows validated delegated password resets with non-admin Helpdesk user
-![Delegation3](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation3.png)
 
 
 ## Future Improvements
