@@ -10,10 +10,17 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 
 ![Network Topology](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png)
 
+```
+Note:  
+In a real‑world Azure environment, domain controllers and client VMs should not have public IP addresses.
+Instead, organizations use Azure Bastion to securely access VMs without exposing RDP/SSH to the internet.
+For lab demonstration purposes, this diagram shows public IPs for simplicity.
+```
+
 | Device / Role | Hostname | Private IP | Subnet | DNS Server | Notes |
 |---------------|----------|------------|--------|------------|-------|
-| Domain Controller / DNS / DHCP | DC01 | 10.0.0.4 | 10.0.0.0/24 | 10.0.0.4 | Static private IP |
-| Client VM 1 | CLIENT01 | 10.0.0.5 | 10.0.0.0/24 | 10.0.0.4 | DHCP from Azure, domain‑joined |
+| Domain Controller / DNS / DHCP | DC-1 | 10.0.0.4 | 10.0.0.0/24 | 10.0.0.4 | Static private IP |
+| Client VM 1 | CLIENT-1 | 10.0.0.5 | 10.0.0.0/24 | 10.0.0.4 | DHCP from Azure, domain‑joined |
 
 
 ## Azure Infrastructure
