@@ -2,6 +2,7 @@
   <img src="https://www.shutterstock.com/image-photo/data-document-content-management-system-600nw-2261088373.jpg" style="max-width: 100%;">
 </p>
 
+![picture](https://www.shutterstock.com/image-photo/data-document-content-management-system-600nw-2261088373.jpg)
 
 # Real-world Active Directory Responsibilities
 ## Domain Password Policy
