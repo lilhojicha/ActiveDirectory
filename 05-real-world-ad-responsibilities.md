@@ -2,7 +2,7 @@
   <img src="https://copilot.microsoft.com/th/id/BCO.5db2a353-45e2-4cd9-87f6-60c2dad758cc.png" style="max-width: 100%;">
 </p>
 
-![picture](https://www.shutterstock.com/image-photo/data-document-content-management-system-600nw-2261088373.jpg)
+![picture](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/banner1.png)
 
 # Real-world Active Directory Responsibilities
 ## Domain Password Policy
