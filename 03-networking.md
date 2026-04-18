@@ -1,7 +1,4 @@
-
-<p align="center">
-  <img src="https://img.freepik.com/premium-photo/futuristic-digital-network-with-interconnected-nodes-lines_975188-125592.jpg" style="max-width: 100%; height: auto;">
-</p>
+![picture](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/banner4.png)
 
 # Networking, DNS & DHCP Configuration
 
