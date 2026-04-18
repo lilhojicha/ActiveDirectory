@@ -1,13 +1,10 @@
 # Active Directory Installation & Configuration
 
 ## Overview
-[What was deployed in this phase and why AD DS was promoted 
-on DC-01]
 The two VM's, the domain controller (DC-1) and the client computer (Client-1) were deployed and AD DS was promoted on DC-1 in order to activate the Active Directory and it's services on the domain controller.
 
 ## AD DS Role Installation
 ### Role Configuration
-[Settings chosen + screenshot of Server Manager with AD DS role]
 - Installed the Active Directory Domain Services (AD DS)
 
 ![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/adds.png)
@@ -134,14 +131,64 @@ foreach ($n in $names) {
 | Account Lockout Threshold | 5 attempts | Brute force mitigation |
 | Lockout Duration | 30 minutes | Balance security/helpdesk load |
 
-[Screenshot of GPO settings]
+![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpopassword.png)
+![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpoacc.png)
+
 
 ## Validation
-[Screenshot proving policies are applied — gpresult or 
-RSOP output]
+![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpresult.png)
 
 
 **‼️What I Learned‼️**
 - Users must be placed in the correct OU for policy targeting
 - Access is granted through **group membership**, not OU placement
 - Password and lockout policies are enforced via Group Policy
+
+
+## Security Groups Design (RBAC)
+### Centralized Group Structure
+
+Security groups were stored in a centralized OU to simplify access management.
+
+    _Groups
+    ├── Helpdesk
+    ├── ITSupport
+    ├── HR
+    └── Accounting
+
+
+![Security_groups](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Security_groups.png)
+
+
+### Group Membership
+- HR -> John Davidson
+- Helpdesk -> Alice johnson
+- Accounting -> Bob martinez
+- ITSupport -> Chris walker
+
+### PowerShell Automation
+
+``` PowerShell
+$path = "DC=mydomain,DC=com"
+$groupsOU = "OU=_Groups,DC=mydomain,DC=com"
+
+# Creates the _Groups OU first to then add the security groups later
+New-ADOrganizationalUnit -Name "_Groups" -ProtectedFromAccidentalDeletion $False -Path $path
+
+# Add new security groups with global scope
+New-ADGroup -Name "Helpdesk" -GroupScope Global -GroupCategory Security -Path $groupsOU
+New-ADGroup -Name "ITSupport" -GroupScope Global -GroupCategory Security -Path $groupsOU
+New-ADGroup -Name "HR" -GroupScope Global -GroupCategory Security -Path $groupsOU
+New-ADGroup -Name "Accounting" -GroupScope Global -GroupCategory Security -Path $groupsOU
+
+# Add members to these security groups
+Add-ADGroupMember -Identity "Helpdesk" -Members ajohnson
+Add-ADGroupMember -Identity "ITSupport" -Members cwalker
+Add-ADGroupMember -Identity "HR" -Members jdavidson
+Add-ADGroupMember -Identity "Accounting" -Members bmartinez
+```
+
+**Why this matters**
+- Users almost never get permissions assigned directly. They acquire access through their roles by being placed in a group, and groups are granted access to resources.
+- Groups represent job roles
+- Permissions are assigned once and scale cleanly
