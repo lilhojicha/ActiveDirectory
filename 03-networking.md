@@ -48,7 +48,7 @@ The Domain Controller must have a static IP address for the client machine to co
 - Client-01 pointed to DC DNS → joined to yourdomain.com
 - Verified machine account created in Computers OU
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/domainjoin.png)
+![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/ipconfig.png)
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/domaincomputer.png)
 
