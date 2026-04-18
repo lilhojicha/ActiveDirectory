@@ -15,6 +15,7 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 - **Subscription:** Deafult
 - **Resource group name:** AD-Lab
 - **Regions:** (US) North Central US
+
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/resourcegroup.png)
 
 ### Virtual Network & Subnet
@@ -22,6 +23,7 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 - **Resource group:** AD-Lab
 - **Virtual Network Name:** ActiveDirectoryVNet
 - **Regions:** (US) North Central US
+
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/virtualnetwork.png)
 
 ### Domain Controller VM (Windows Server 2019)
@@ -30,6 +32,7 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 - **Static Private IP:** 10.0.0.4
 - **Virtual Network:** ActiveDirectoryVNet
 - **Location:** (US) North Central US
+
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/DC-1.png)
 
 ### Client VM (Windows 10 Pro)
@@ -38,6 +41,7 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 - **DNS Server:** 10.0.0.4
 - **Virtual Network:** ActiveDirectoryVNet
 - **Location:** (US) North Central US
+
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/Client-1.png)
 
 
