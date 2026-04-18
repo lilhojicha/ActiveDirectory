@@ -1,4 +1,4 @@
-![Cloud networks picture](https://img.freepik.com/premium-photo/laptop-connection-cloud-storage-collaboration-generative-ai_887552-7694.jpg)
+![Cloud networks picture](https://th.bing.com/th/id/R.61931fe75049ea46ca14f89efacbb294?rik=%2f66whgckyC1aQA&riu=http%3a%2f%2fclipart-library.com%2fnewhp%2fcomputer-network-download-clip-art-computer.jpg&ehk=O0figY2USAZX74RbIj57jr5vX2f4YX%2fmYGSk4S3lQwg%3d&risl=&pid=ImgRaw&r=0)
 
 # Networking, DNS & DHCP Configuration
 
