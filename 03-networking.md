@@ -1,8 +1,11 @@
+![Cloud networks picture](https://img.freepik.com/premium-photo/laptop-connection-cloud-storage-collaboration-generative-ai_887552-7694.jpg)
+
 # Networking, DNS & DHCP Configuration
 
 ## Overview
-[What networking was configured and why it matters for 
-AD functionality]
+The network portion that was configured was making the Domain Controller's private IP address static and configuring the client machine's DNS server to the Domain Controller's IP address.
+
+The Domain Controller must have a static IP address for the client machine to connect to.
 
 ## Network Architecture
 
@@ -13,7 +16,6 @@ AD functionality]
 | DC-01 Static IP | 10.0.0.4 |
 | Client-01 IP | 10.0.0.5 (DHCP) |
 
-[Screenshot of Azure VNet configuration]
 
 ## Static IP Assignment — Domain Controller
 - **Rationale:** DCs must have static IPs — DNS and 

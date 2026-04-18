@@ -1,4 +1,4 @@
-![Active directory microsoft](https://ivorontita.com/wp-content/uploads/2020/06/kisspng-active-directory-federation-services-microsoft-off-5b1e5b080fff82.7771912715287160400655.png)
+![Active directory picture](https://ivorontita.com/wp-content/uploads/2020/06/kisspng-active-directory-federation-services-microsoft-off-5b1e5b080fff82.7771912715287160400655.png)
 
 # Environment Setup
 This document details the Azure environment provisioned for an Active Directory home lab, including VM configuration, networking, and domain infrastructure.
