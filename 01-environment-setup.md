@@ -6,9 +6,15 @@ This document details the Azure environment provisioned for an Active Directory 
 ## Lab Overview
 I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client computer to simulate 
 
-## Lab Architecture
-- ![Network Topology](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/network_Topology.png)
-- [IP address table]
+## 🗂️ Lab Architecture
+
+![Network Topology](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png)
+
+| Device / Role | Hostname | Private IP | Subnet | DNS Server | Notes |
+|---------------|----------|------------|--------|------------|-------|
+| Domain Controller / DNS / DHCP | DC01 | 10.0.0.4 | 10.0.0.0/24 | 10.0.0.4 | Static private IP |
+| Client VM 1 | CLIENT01 | 10.0.0.5 | 10.0.0.0/24 | 10.0.0.4 | DHCP from Azure, domain‑joined |
+
 
 ## Azure Infrastructure
 ### Resource Group
@@ -52,4 +58,5 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 
 
 ## Environment Validation
-[Proof it's running — screenshot of both VMs "Running" in Azure portal]
+
+![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/validation.png)
