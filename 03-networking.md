@@ -1,4 +1,7 @@
-![Cloud networks picture](https://img.freepik.com/premium-photo/futuristic-digital-network-with-interconnected-nodes-lines_975188-125592.jpg)
+
+<p align="center">
+  <img src="https://img.freepik.com/premium-photo/futuristic-digital-network-with-interconnected-nodes-lines_975188-125592.jpg" style="max-width: 100%; height: auto;">
+</p>
 
 # Networking, DNS & DHCP Configuration
 
