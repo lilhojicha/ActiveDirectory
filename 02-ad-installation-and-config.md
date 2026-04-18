@@ -1,4 +1,4 @@
-![Active directory picture](https://tse1.mm.bing.net/th/id/OIP.BNIBcIN0mwRacQpyKXNVgwHaE8?rs=1&pid=ImgDetMain&o=7&rm=3)
+![Active directory picture](https://www.method-automation.com/wp-content/uploads/2018/03/help-desk-software-microsoft-active-directory.png)
 
 # Active Directory Installation & Configuration
 
