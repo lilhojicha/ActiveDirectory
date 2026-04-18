@@ -299,4 +299,4 @@ This allows Helpdesk staff to perform common tasks without full administrative r
 - Automate user onboarding with CSV-based PowerShell scripts
 
 ## Summary
-This project demonstrates practical, security-conscious Active Directory administration skills aligned with real enterprise environments. It highlights both technical execution and administrative decision-making, supported by automation and clear documentation.
+This project demonstrates practical, security-conscious Active Directory administration skills aligned with simulated enterprise environments. 
