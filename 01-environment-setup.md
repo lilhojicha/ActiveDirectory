@@ -4,7 +4,7 @@
 This document details the Azure environment provisioned for an Active Directory home lab, including VM configuration, networking, and domain infrastructure.
 
 ## Lab Overview
-I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client computer to simulate 
+I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client computer to simulate an enterprise IT environment's identity, access, and network management system
 
 ## 🗂️ Lab Architecture
 
@@ -59,6 +59,7 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 
 
 ## Pre-Configuration Steps
+- Put the Domain Controller and client VM on the same virtual network.
 - Assign a static private IP address to the Domain Controller virtual machine (10.0.0.4)
 - Configured the client virtual machine's DNS server to the Domain Controller's IP address (10.0.0.4)
 - Allowed Inbound ports 3389 (RDP) for both VMs

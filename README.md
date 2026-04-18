@@ -73,7 +73,7 @@ This structure allows:
 ### [PowerShell Automation Script](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_location_OU.ps1)
 
 ```PowerShell
-$path = "OU=OU_Branches,DC=mydomain,DC=com"
+$path = "OU=_Branches,DC=mydomain,DC=com"
 $sub_ou = "Users", "Workstations", "Laptops"
 
 # here are the 20 most populous cities
@@ -143,7 +143,7 @@ foreach ($n in $names) {
                 -Surname $last_name `
                 -SamAccountName $acc_name `
                 -Path "ou=_USERS,$(([ADSI]`"").distinguishedName)" `
-                -AccountPassword $password
+                -AccountPassword $password `
                 -Enabled $true
 }
 ```
@@ -300,3 +300,34 @@ This allows Helpdesk staff to perform common tasks without full administrative r
 
 ## Summary
 This project demonstrates practical, security-conscious Active Directory administration skills aligned with simulated enterprise environments. 
+
+
+----
+# Active Directory Home Lab
+
+## Objective
+[2-3 sentences: what you built, what environment it simulates, 
+and what skills it demonstrates]
+
+## Lab Architecture
+[Network topology diagram/image]
+
+| Machine | OS | Role | Private IP |
+|---|---|---|---|
+| DC-1 | Windows Server 2022 | Domain Controller | 10.0.0.4 |
+| Client-1 | Windows 10 Pro | Domain-joined Workstation | 10.0.0.5 |
+
+## Technologies Used
+[Your list]
+
+## Lab Documentation
+- [01 - Environment Setup](./01-environment-setup.md)
+- [02 - AD Installation & Configuration](./02-ad-installation-and-config.md)
+- [03 - Networking, DNS & DHCP](./03-networking-dns-dhcp.md)
+- [04 - Troubleshooting & Validation](./04-troubleshooting.md)
+
+## Key Skills Demonstrated
+[Bullet list of 5-7 skills — this is recruiter bait]
+
+## Outcomes
+[What you learned / what this lab prepares you to do on the job]

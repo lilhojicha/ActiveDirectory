@@ -21,7 +21,7 @@ foreach ($n in $names) {
                 -Surname $last_name `
                 -SamAccountName $acc_name `
                 -Path "ou=_USERS,$(([ADSI]`"").distinguishedName)" `
-                -AccountPassword $password
+                -AccountPassword $password `
                 -Enabled $true
             
 }

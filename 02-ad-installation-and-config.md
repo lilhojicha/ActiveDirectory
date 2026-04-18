@@ -1,0 +1,147 @@
+# Active Directory Installation & Configuration
+
+## Overview
+[What was deployed in this phase and why AD DS was promoted 
+on DC-01]
+The two VM's, the domain controller (DC-1) and the client computer (Client-1) were deployed and AD DS was promoted on DC-1 in order to activate the Active Directory and it's services on the domain controller.
+
+## AD DS Role Installation
+### Role Configuration
+[Settings chosen + screenshot of Server Manager with AD DS role]
+- Installed the Active Directory Domain Services (AD DS)
+
+![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/adds.png)
+
+
+### Domain Promotion
+- **Domain Name:** mydomain.com
+- **Forest/Domain Functional Level:** Default (because it's already the highest available)
+- **DNS:** Configured on DC during promotion
+
+![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/promotionwizard.png)
+
+---
+
+## Organizational Unit (OU) Structure
+
+### OU Design Rationale
+OUs were designed around **policy boundaries and administrative delegation**, following best practices used in enterprise environments.
+
+    mydomain.com
+    ├── _Admins
+    │
+    ├── _Branches
+    │   ├── Houston_TX
+    │   │     ├── Users
+    │   │     ├── Workstations
+    │   │     └── Laptops
+    │   └── Las_Vegas_NV
+    │         ├── Users
+    │         ├── Workstations
+    │         └── Laptops
+    └── _Groups
+
+| OU Name | Purpose |
+|---|---|
+| _ADMINS | Privileged admin accounts |
+| _Branches | Contains branch locations |
+| _Groups | Security groups |
+| Workstations | Domain-joined workstations in sub-branch |
+| Laptops | Domain-joined laptops in sub-branch |
+| Users | Standard user accounts in sub-branch |
+
+This structure allows:
+
+- Targeted Group Policy application
+- Clean separation of users and devices
+- Scalable expansion to additional locations or departments
+
+![OU structure](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/ouStructure.png)
+
+### [PowerShell Automation Script](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_location_OU.ps1)
+
+```PowerShell
+$path = "OU=_Branches,DC=mydomain,DC=com"
+$sub_ou = "Users", "Workstations", "Laptops"
+
+# here are the 20 most populous cities
+$locations = "San_Diego_CA", "Los_Angeles_CA", "New_York_NY", "Boston_MA", "Chicago_IL", "Houston_TX", "Phoenix_AZ", "Philadelphia_PA", "San_Antonio_TX", "Dallas_TX", "Jacksonville_FL", "Fort_Worth_TX", "San_Jose_CA", "Austin_TX", "Charlotte_NC", "Columbus_OH", "Indianapolis_IN", "San_Francisco_CA", "Seattle_WA", "Denver_CO", "Oklahoma_City_OK"
+
+
+foreach($n in $locations){
+    # Creating the location branch
+    New-ADOrganizationalUnit -Name $n -ProtectedFromAccidentalDeletion $False -Path $path
+
+    # Creating the sub OUs for the branches
+    foreach ($ou in $sub_ou) {
+        New-ADOrganizationalUnit    -Name $ou `
+                                    -ProtectedFromAccidentalDeletion $False `
+                                    -Path "OU=$n,$path"
+    }
+}
+```
+
+## User Account Configuration
+### Admin Account
+- Created a dedicated domain admin account (not using 
+  default Administrator)
+- **Rationale:** Best practice — mirrors real enterprise 
+  security posture
+
+![Admin account](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/adminuser.png)
+
+### Standard User Accounts
+- Bulk users created via PowerShell script
+
+To practice bulk provisioning, I used [PowerShell Script](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_users.ps1) to import a name list and create a large test user set in a dedicated lab OU. **A standard lab password was used only for initial testing in this isolated environment.**
+
+```PowerShell
+# stores each line to an array of newline-delimited strings
+$names = Get-Content -Path .\names.txt
+# assign everyone with the same password
+$password = ConvertTo-SecureString "Password1" -AsPlainText -Force
+# create the OU to store the users
+New-ADOrganizationalUnit -Name _USERS -ProtectedFromAccidentalDeletion $false
+
+foreach ($n in $names) {
+    # separate first and last name by space delimiter
+    $first_name = $n.split(" ")[0].ToLower()
+    $last_name = $n.split(" ")[1].ToLower()
+    $acc_name = $first_name[0] + $last_name
+
+    Write-Host "Creating user: $acc_name" -BackgroundColor Black -ForegroundColor Cyan
+
+    # create new ADUser
+    New-ADUser  -Name $n `
+                -GivenName $first_name `
+                -Surname $last_name `
+                -SamAccountName $acc_name `
+                -Path "ou=_USERS,$(([ADSI]`"").distinguishedName)" `
+                -AccountPassword $password `
+                -Enabled $true
+}
+```
+
+![Populated Users](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/populatedusers.png)
+
+## Group Policy — Password & Account Policy
+### Default Domain Policy Configuration
+
+| Setting | Value | Rationale |
+|---|---|---|
+| Min Password Length | 10 chars | Baseline security standard |
+| Password History | 24 | Prevents reuse |
+| Account Lockout Threshold | 5 attempts | Brute force mitigation |
+| Lockout Duration | 30 minutes | Balance security/helpdesk load |
+
+[Screenshot of GPO settings]
+
+## Validation
+[Screenshot proving policies are applied — gpresult or 
+RSOP output]
+
+
+**‼️What I Learned‼️**
+- Users must be placed in the correct OU for policy targeting
+- Access is granted through **group membership**, not OU placement
+- Password and lockout policies are enforced via Group Policy
