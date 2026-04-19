@@ -1,4 +1,4 @@
-![picture](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/banner4.png)
+![banner](.../screenshots/banner4.png)
 
 # Networking, DNS & DHCP Configuration
 
