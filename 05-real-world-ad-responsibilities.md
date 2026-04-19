@@ -2,18 +2,17 @@
 ![picture](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/banner3.png)
 
 # Real-world Active Directory Responsibilities
-## Domain Password Policy
-Configured a domain-wide password policy using Group Policy.
-![Password Policy](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Password_policy.png)
-
 ## Drive Mapping
 ### Logon Script (SYSVOL)
 
 Created a PowerShell logon script stored in SYSVOL, ensuring availability to all domain users.
   
+**Note:**
+You must create the folder you want to share first and go to Properties to share the folder in order to create the share path of the folder
+
 ``` Powershell
 $DriveLetter = "H"
-$SharePath = "\\DC\DeptShare"
+$SharePath = "\\DC-1\DeptShare"
 $existingDrive = Get-PSDrive -Name $DriveLetter -ErrorAction SilentlyContinue
 
 
@@ -35,10 +34,12 @@ if (!$existingDrive) {
 }
 
 ```
-![map_drives](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives.png)
+![map_drives](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/05-extra/drivemapscript.png)
 
 ### Group Policy Preference (Recommended)
-Also implemented drive mapping using Group Policy Preferences to improve reliability and troubleshooting.
+Also implemented drive mapping using Group Policy Preferences to improve reliability and troubleshooting because GPP can be configured to apply drive mappings asynchronously, meaning it'll persist across reboots and it runs after logon. Plus logon scripts are considered legacy. 
+
+
 <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/mapped1.png" width="500">
 
 <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives3.png" width="300">

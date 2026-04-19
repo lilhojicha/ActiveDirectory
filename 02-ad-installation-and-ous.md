@@ -71,7 +71,7 @@ foreach($n in $locations){
     # Creating the location branch
     New-ADOrganizationalUnit -Name $n -ProtectedFromAccidentalDeletion $False -Path $path
 
-    # Creating the sub OUs for the branches
+    # Creating the sub OUs for the branches aka users, workstations, laptops
     foreach ($ou in $sub_ou) {
         New-ADOrganizationalUnit    -Name $ou `
                                     -ProtectedFromAccidentalDeletion $False `
@@ -123,29 +123,6 @@ foreach ($n in $names) {
 
 ![Populated Users](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/populatedusers.png)
 
-## Group Policy — Password & Account Policy
-### Default Domain Policy Configuration
-
-| Setting | Value | Rationale |
-|---|---|---|
-| Min Password Length | 10 chars | Baseline security standard |
-| Password History | 24 | Prevents reuse |
-| Account Lockout Threshold | 5 attempts | Brute force mitigation |
-| Lockout Duration | 30 minutes | Balance security/helpdesk load |
-
-![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpopassword.png)
-![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpoacc.png)
-
-
-## Validation
-![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpresult.png)
-
-
-**‼️What I Learned‼️**
-- Users must be placed in the correct OU for policy targeting
-- Access is granted through **group membership**, not OU placement
-- Password and lockout policies are enforced via Group Policy
-
 
 ## Security Groups Design (RBAC)
 ### Centralized Group Structure
@@ -194,3 +171,28 @@ Add-ADGroupMember -Identity "Accounting" -Members bmartinez
 - Users almost never get permissions assigned directly. They acquire access through their roles by being placed in a group, and groups are granted access to resources.
 - Groups represent job roles
 - Permissions are assigned once and scale cleanly
+
+
+## Group Policy — Password & Account Policy
+### Default Domain Policy Configuration
+
+| Setting | Value | Rationale |
+|---|---|---|
+| Min Password Length | 10 chars | Baseline security standard |
+| Password History | 24 | Prevents reuse |
+| Account Lockout Threshold | 5 attempts | Brute force mitigation |
+| Lockout Duration | 30 minutes | Balance security/helpdesk load |
+
+![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpopassword.png)
+![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpoacc.png)
+
+
+## Validation
+![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpresult.png)
+
+
+**‼️What I Learned‼️**
+- Users must be placed in the correct OU for policy targeting
+- Access is granted through **group membership**, not OU placement
+- Password and lockout policies are enforced via Group Policy
+
