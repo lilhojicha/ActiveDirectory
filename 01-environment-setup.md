@@ -8,10 +8,14 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 
 ## 🗂️ Lab Architecture
 
-<p align="center">
-  <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png"
-       style="border:1px solid #ddd; padding:4px; border-radius:6px; box-shadow:0 0 10px rgba(0,0,0,0.15);">
-</p>
+<table>
+  <tr>
+    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
+      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png">
+    </td>
+  </tr>
+</table>
+
 
 ```
 Note:  
@@ -34,6 +38,15 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/resourcegroup.png)
 
+<table>
+  <tr>
+    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
+      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/resourcegroup.png">
+    </td>
+  </tr>
+</table>
+
+
 ### Virtual Network & Subnet
 - **Subscription:** Deafult
 - **Resource group:** AD-Lab
@@ -41,6 +54,14 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 - **Regions:** (US) North Central US
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/virtualnetwork.png)
+
+<table>
+  <tr>
+    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
+      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/virtualnetwork.png">
+    </td>
+  </tr>
+</table>
 
 ### Domain Controller VM (Windows Server 2019)
 - **Image:** Windows Server 2022 Datacenter
@@ -51,6 +72,14 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/DC-1.png)
 
+<table>
+  <tr>
+    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
+      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/DC-1.png">
+    </td>
+  </tr>
+</table>
+
 ### Client VM (Windows 10 Pro)
 - **Image:** Windows 10 Pro
 - **VM name:** Client-1
@@ -59,6 +88,14 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 - **Location:** (US) North Central US
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/Client-1.png)
+
+<table>
+  <tr>
+    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
+      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/Client-1.png">
+    </td>
+  </tr>
+</table>
 
 
 ## Pre-Configuration Steps
@@ -71,3 +108,11 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 ## Environment Validation
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/validation.png)
+
+<table>
+  <tr>
+    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
+      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/validation.png">
+    </td>
+  </tr>
+</table>
