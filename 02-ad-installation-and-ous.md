@@ -140,7 +140,7 @@ Security groups were stored in a centralized OU to simplify access management.
 
 <p align="center">
   <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Security_groups.png"
-       style="border:1px solid #ddd; padding:4px; border-radius:6px; box-shadow:0 0 10px rgba(0,0,0,0.15);">
+       style="border:2px solid #020000; padding:4px; border-radius:6px; box-shadow:0 0 10px rgba(0,0,0,0.15);">
 </p>
 
 
