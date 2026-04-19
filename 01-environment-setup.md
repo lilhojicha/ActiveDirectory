@@ -10,7 +10,7 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 
 <table>
   <tr>
-    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
+    <td style="background:#bfbfbf; border:8px solid #000; padding:14px;">
       <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png">
     </td>
   </tr>
