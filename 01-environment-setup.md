@@ -8,8 +8,10 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 
 ## 🗂️ Lab Architecture
 
-![Network Topology](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png)
-
+<p align="center">
+  <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png"
+       style="border:1px solid #ddd; padding:4px; border-radius:6px; box-shadow:0 0 10px rgba(0,0,0,0.15);">
+</p>
 
 ```
 Note:  
