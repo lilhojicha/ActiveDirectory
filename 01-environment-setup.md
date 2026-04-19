@@ -10,26 +10,6 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 
 ![Network Topology](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png)
 
-```Mermaid
-graph LR
-
-    Internet(("Internet"))
-
-    subgraph Azure_VNet["Azure Virtual Network (10.0.0.0/16)"]
-
-        subgraph AD_Subnet["AD Subnet (10.0.0.0/24)"]
-            DC01["DC01<br/>Domain Controller<br/>DNS Server<br/>Private: 10.0.0.4<br/>Public: Yes"]
-            CLIENT01["CLIENT01<br/>Workstation<br/>Private: 10.0.0.5<br/>Public: Yes"]
-        end
-
-    end
-
-    Internet --> DC01
-    Internet --> CLIENT01
-
-    CLIENT01 -->|DNS Queries| DC01
-
-```
 
 ```
 Note:  
