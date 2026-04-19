@@ -8,13 +8,8 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 
 ## 🗂️ Lab Architecture
 
-<table>
-  <tr>
-    <td style="background:#a6a6a6; border:8px solid #000; padding:18px;">
-      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png">
-    </td>
-  </tr>
-</table>
+
+![Network Topology](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png)
 
 
 ```
@@ -38,13 +33,6 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/resourcegroup.png)
 
-<table>
-  <tr>
-    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
-      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/resourcegroup.png">
-    </td>
-  </tr>
-</table>
 
 
 ### Virtual Network & Subnet
@@ -55,13 +43,6 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/virtualnetwork.png)
 
-<table>
-  <tr>
-    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
-      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/virtualnetwork.png">
-    </td>
-  </tr>
-</table>
 
 ### Domain Controller VM (Windows Server 2019)
 - **Image:** Windows Server 2022 Datacenter
@@ -72,13 +53,7 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/DC-1.png)
 
-<table>
-  <tr>
-    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
-      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/DC-1.png">
-    </td>
-  </tr>
-</table>
+
 
 ### Client VM (Windows 10 Pro)
 - **Image:** Windows 10 Pro
@@ -89,13 +64,6 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/Client-1.png)
 
-<table>
-  <tr>
-    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
-      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/Client-1.png">
-    </td>
-  </tr>
-</table>
 
 
 ## Pre-Configuration Steps
@@ -109,10 +77,3 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 
 ![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/validation.png)
 
-<table>
-  <tr>
-    <td style="background:#d9d9d9; border:6px solid #000; padding:14px;">
-      <img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/validation.png">
-    </td>
-  </tr>
-</table>
