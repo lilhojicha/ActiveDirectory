@@ -1,4 +1,4 @@
-![Active directory picture](https://ivorontita.com/wp-content/uploads/2020/06/kisspng-active-directory-federation-services-microsoft-off-5b1e5b080fff82.7771912715287160400655.png)
+![Active directory picture](screenshots/01-setup/banner.png)
 
 # Environment Setup
 This document details the Azure environment provisioned for an Active Directory home lab, including VM configuration, networking, and domain infrastructure.
@@ -9,7 +9,7 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 ## 🗂️ Lab Architecture
 
 
-![Network Topology](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/network.png)
+![Network Topology](screenshots/01-setup/network.png)
 
 
 ```
@@ -31,7 +31,7 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 - **Resource group name:** AD-Lab
 - **Regions:** (US) North Central US
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/resourcegroup.png)
+![Resource Group Configuration ](screenshots/01-setup/resourcegroup.png)
 
 
 
@@ -41,7 +41,7 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 - **Virtual Network Name:** ActiveDirectoryVNet
 - **Regions:** (US) North Central US
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/virtualnetwork.png)
+![Resource Group Configuration ](screenshots/01-setup/virtualnetwork.png)
 
 
 ### Domain Controller VM (Windows Server 2019)
@@ -51,7 +51,7 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 - **Virtual Network:** ActiveDirectoryVNet
 - **Location:** (US) North Central US
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/DC-1.png)
+![Resource Group Configuration ](screenshots/01-setup/DC-1.png)
 
 
 
@@ -62,7 +62,7 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 - **Virtual Network:** ActiveDirectoryVNet
 - **Location:** (US) North Central US
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/Client-1.png)
+![Resource Group Configuration ](screenshots/01-setup/Client-1.png)
 
 
 
@@ -75,5 +75,5 @@ For lab demonstration purposes, this diagram shows public IPs for simplicity.
 
 ## Environment Validation
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/01-setup/validation.png)
+![Resource Group Configuration ](screenshots/01-setup/validation.png)
 

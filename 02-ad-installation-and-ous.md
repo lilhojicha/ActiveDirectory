@@ -1,4 +1,5 @@
-![Active directory picture](https://www.method-automation.com/wp-content/uploads/2018/03/help-desk-software-microsoft-active-directory.png)
+![Active directory picture](screenshots/02-ad-install/banner.png)
+
 
 # Active Directory Installation & Configuration
 
@@ -9,7 +10,7 @@ The two VM's, the domain controller (DC-1) and the client computer (Client-1) we
 ### Role Configuration
 - Installed the Active Directory Domain Services (AD DS)
 
-![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/adds.png)
+![AD DS installed](screenshots/02-ad-install/adds.png)
 
 
 ### Domain Promotion
@@ -17,7 +18,7 @@ The two VM's, the domain controller (DC-1) and the client computer (Client-1) we
 - **Forest/Domain Functional Level:** Default (because it's already the highest available)
 - **DNS:** Configured on DC during promotion
 
-![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/promotionwizard.png)
+![AD DS installed](screenshots/02-ad-install/promotionwizard.png)
 
 ---
 
@@ -55,9 +56,9 @@ This structure allows:
 - Clean separation of users and devices
 - Scalable expansion to additional locations or departments
 
-![OU structure](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/ouStructure.png)
+![OU structure](screenshots/02-ad-install/ouStructure.png)
 
-### [PowerShell Automation Script](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_location_OU.ps1)
+### [PowerShell Automation Script](creating_location_OU.ps1)
 
 ```PowerShell
 $path = "OU=_Branches,DC=mydomain,DC=com"
@@ -87,12 +88,12 @@ foreach($n in $locations){
 - **Rationale:** Best practice — mirrors real enterprise 
   security posture
 
-![Admin account](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/adminuser.png)
+![Admin account](screenshots/02-ad-install/adminuser.png)
 
 ### Standard User Accounts
 - Bulk users created via PowerShell script
 
-To practice bulk provisioning, I used [PowerShell Script](https://github.com/lilhojicha/ActiveDirectory/blob/main/creating_users.ps1) to import a name list and create a large test user set in a dedicated lab OU. **A standard lab password was used only for initial testing in this isolated environment.**
+To practice bulk provisioning, I used [PowerShell Script](creating_users.ps1) to import a name list and create a large test user set in a dedicated lab OU. **A standard lab password was used only for initial testing in this isolated environment.**
 
 ```PowerShell
 # stores each line to an array of newline-delimited strings
@@ -121,7 +122,7 @@ foreach ($n in $names) {
 }
 ```
 
-![Populated Users](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/populatedusers.png)
+![Populated Users](screenshots/02-ad-install/populatedusers.png)
 
 
 ## Security Groups Design (RBAC)
@@ -136,7 +137,7 @@ Security groups were stored in a centralized OU to simplify access management.
     └── Accounting
 
 
-![Security_groups](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/Security_groups.png)
+![Security_groups](screenshots/Security_groups.png)
 
 
 
@@ -185,12 +186,12 @@ Add-ADGroupMember -Identity "Accounting" -Members bmartinez
 | Account Lockout Threshold | 5 attempts | Brute force mitigation |
 | Lockout Duration | 30 minutes | Balance security/helpdesk load |
 
-![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpopassword.png)
-![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpoacc.png)
+![AD DS installed](screenshots/02-ad-install/gpopassword.png)
+![AD DS installed](screenshots/02-ad-install/gpoacc.png)
 
 
 ## Validation
-![AD DS installed](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/02-ad-install/gpresult.png)
+![AD DS installed](screenshots/02-ad-install/gpresult.png)
 
 
 **‼️What I Learned‼️**

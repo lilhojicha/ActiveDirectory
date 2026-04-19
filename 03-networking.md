@@ -1,4 +1,4 @@
-![banner](.../screenshots/banner4.png)
+![banner](screenshots/banner4.png)
 
 # Networking, DNS & DHCP Configuration
 
@@ -21,7 +21,7 @@ The Domain Controller must have a static IP address for the client machine to co
 - **Rationale:** DCs must have static IPs — DNS and 
   AD rely on a consistent address
 
-![DC NIC](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/dcnic.png)
+![DC NIC](screenshots/03-network/dcnic.png)
 
 ## DNS Configuration
 ### DC as Primary DNS
@@ -30,24 +30,24 @@ The Domain Controller must have a static IP address for the client machine to co
 - **Rationale:** Required for domain join and AD 
   authentication to function
 
-![Client NIC DNS settings](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/clientnic.png)
+![Client NIC DNS settings](screenshots/03-network/clientnic.png)
 
 ### DNS Validation
 - Forward lookup zone confirmed for yourdomain.com
 - Verified A records for DC-01 exist
 
-![Client NIC DNS settings](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/dnsmanager.png)
+![Client NIC DNS settings](screenshots/03-network/dnsmanager.png)
 
-![Client NIC DNS settings](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/arecord.png)
+![Client NIC DNS settings](screenshots/03-network/arecord.png)
 
 
 ## Client Domain Join
 - Client-01 pointed to DC DNS → joined to yourdomain.com
 - Verified machine account created in Computers OU
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/ipconfig.png)
+![Resource Group Configuration ](screenshots/03-network/ipconfig.png)
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/domaincomputer.png)
+![Resource Group Configuration ](screenshots/03-network/domaincomputer.png)
 
 ## Connectivity Validation
 
@@ -58,8 +58,8 @@ The Domain Controller must have a static IP address for the client machine to co
 | Domain join auth | System Properties | Joined |
 
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/pingdomain.png)
+![Resource Group Configuration ](screenshots/03-network/pingdomain.png)
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/nslookupdomain.png)
+![Resource Group Configuration ](screenshots/03-network/nslookupdomain.png)
 
-![Resource Group Configuration ](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/03-network/sysprop.png)
+![Resource Group Configuration ](screenshots/03-network/sysprop.png)
