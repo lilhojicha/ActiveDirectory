@@ -49,12 +49,15 @@ if (!$existingDrive) {
 Also implemented drive mapping using Group Policy Preferences to improve reliability and troubleshooting because GPP can be configured to apply drive mappings asynchronously, meaning it'll persist across reboots and it runs after logon. Plus logon scripts are considered legacy. 
 
 Created a new GPO and linked it to the Users in Los_Angeles_CA OU:
+
 ![Create GPO and linked to OU](screenshots/05-extra/creategpo.png)
 
 Configured the drive mapping with the correct share path and drive letter:
+
 ![Properties of map drives GPO](screenshots/05-extra/mapdrives3.png)
 
 Applied item-level targeting to restrict the mapping to HR security group members only:
+
 ![Targeting editor](screenshots/05-extra/map_drives4.png)
 
 Verified GPO application using gpupdate /force and confirmed mapped drive behavior after user logon:
