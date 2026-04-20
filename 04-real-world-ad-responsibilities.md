@@ -1,5 +1,5 @@
 
-![picture](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/banner3.png)
+![picture](/screenshots/banner3.png)
 
 # Real-world Active Directory Responsibilities
 ## Drive Mapping
@@ -34,23 +34,21 @@ if (!$existingDrive) {
 }
 
 ```
-![map_drives](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/05-extra/drivemapscript.png)
+![map_drives](/screenshots/05-extra/drivemapscript.png)
 
-### Group Policy Preference (Recommended)
+### Group Policy Preference
 Also implemented drive mapping using Group Policy Preferences to improve reliability and troubleshooting because GPP can be configured to apply drive mappings asynchronously, meaning it'll persist across reboots and it runs after logon. Plus logon scripts are considered legacy. 
 
 
-<img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/mapped1.png" width="500">
+![map_drives](screenshots/05-extra/creategpo.png)
 
-<img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives3.png" width="300">
+![map_drives](screenshots/05-extra/mapdrives3.png)
 
-<img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives4.png" width="500">
+![map_drives](screenshots/05-extra/map_drives4.png)
 
 Verified GPO application using gpupdate /force and confirmed mapped drive behavior after user logon
 
-<img src="https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/map_drives5.png" width="500">
-
-
+![map_drives](screenshots/05-extra/confirmdrivesharegpo.png)
 
 ## File Share Security (NTFS vs Share Permissions)
 
@@ -68,8 +66,8 @@ Verified GPO application using gpupdate /force and confirmed mapped drive behavi
 
 Delegated password reset permissions to the Helpdesk group using the Delegation of Control Wizard.
 
-![Delegation1](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation1.png)
+![Delegation1](/screenshots/05-extra/delegation1.png)
 
-![Delegation2](https://github.com/lilhojicha/ActiveDirectory/blob/main/screenshots/delegation2.png)
+![Delegation2](/screenshots/05-extra/delegation2.png)
 
 This allows Helpdesk staff to perform common tasks without full administrative rights, following the **principle of least privilege**.

@@ -16,7 +16,7 @@ real IT environments.
 ### Symptom
 Logon script failed to map the Accounting shared drive. PowerShell returned:
 
-[will add screenshot of error message]
+![No network path for drive](screenshots/04-troubleshooting/nonetworkpath.png)
 
 ### Investigation
 - Attempted to manually navigate to `\\DC-1\Accounting` from the client — path 
@@ -52,7 +52,7 @@ the HR folder, one HR member could see the drive but could not create
 files or folders inside it.
 
 ### Investigation
-- Confirmed the HR folder NTFS permissions showed HR → Full Control ✅
+- Confirmed the HR folder NTFS permissions showed HR → Full Control 
 - Noticed the HR folder had a **parent folder** that was not shared
 - Checked parent folder NTFS permissions: `Everyone → Read` only
 - Added HR group to the parent folder with **Read & List** permissions
@@ -86,6 +86,8 @@ exclusively through NTFS permissions to avoid this conflict.
 Running the user/group creation script returned an access denied error 
 when attempting to create new AD users.
 
+![Error Message](screenshots/04-troubleshooting/errormessage.png)
+
 ### Script Used
 ```PowerShell
 $path = "DC=mydomain,DC=com"
@@ -100,20 +102,6 @@ New-ADUser -Name "Bob Martinez" -GivenName Bob -Surname Martinez -SamAccountName
 
 New-ADUser -Name "Chris Walker" -GivenName Chris -Surname Walker -SamAccountName cwalker -Path $ou -AccountPassword (Read-Host -AsSecureString) -Enabled $true
 
-
-# Creates the _Groups OU first to then add the security groups later
-New-ADOrganizationalUnit -Name "_Groups" -ProtectedFromAccidentalDeletion $False -Path $path
-
-# Add new security groups with global scope
-New-ADGroup -Name "Helpdesk" -GroupScope Global -GroupCategory Security -Path $groupsOU
-New-ADGroup -Name "ITSupport" -GroupScope Global -GroupCategory Security -Path $groupsOU
-New-ADGroup -Name "HR" -GroupScope Global -GroupCategory Security -Path $groupsOU
-New-ADGroup -Name "Accounting" -GroupScope Global -GroupCategory Security -Path $groupsOU
-
-# Add members to these security groups
-Add-ADGroupMember -Identity "Helpdesk" -Members ajohnson
-Add-ADGroupMember -Identity "ITSupport" -Members cwalker
-Add-ADGroupMember -Identity "HR" -Members jdavidson
 ```
 The script halted, leaving `ajohnson` created in AD but in a 
 **disabled state**.
