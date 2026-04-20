@@ -172,8 +172,8 @@ the domain policy before account creation.
 | OUs created correctly | ADUC | ✅ | [OU structure in ADUC](screenshots/02-ad-install/ouStructure.png) |
 | Users created and enabled | ADUC | ✅ | [Users enabled in ADUC](screenshots/04-troubleshooting/bulkusers.png) |
 | Drive mapping working for Accounting | Logon script test | ✅ | [Successful drive mapping](screenshots/04-troubleshooting/Screenshot%202026-04-18%20161547.png) |
-| Security groups created and populated | ADUC → Group Members | ✅ | [Security Groups in ADUC](screenshots/02-ad-install/Security_groups.png) + [_Groups OU with members assigned](screenshots/04-troubleshooting/users-in-accounting.png)|
-| GPP drive map visible to HR users | Client login verification | ✅ | [Mapped drive visible](screenshots/04-troubleshooting/HRdrivevisible.png) |
+| Security groups created and populated | ADUC → Group Members | ✅ | [Security Groups in ADUC](screenshots/02-ad-install/securitygroups.png) + [_Groups OU with members assigned](screenshots/04-troubleshooting/users-in-accounting.png)|
+| GPP drive map visible to HR users | Client login verification | ✅ | [Mapped drive visible from HR member](screenshots/04-troubleshooting/HRdrivevisible.png) |
 | HR shared drive write access confirmed | File creation test on client | ✅ | [Mapped drive successful](screenshots/04-troubleshooting/Screenshot%202026-04-18%20174732.png) |
 
 ## Reflection
