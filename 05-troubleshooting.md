@@ -33,7 +33,9 @@ did not yet exist as a network share.
 1. Right-clicked the Accounting folder → **Properties → Sharing tab**
 2. Selected **Share** and added the appropriate security group with 
    correct permissions
-   ![Accounting shared](screenshots/04-troubleshooting/Screenshot%202026-04-18%20161520.png)
+
+![Accounting shared](screenshots/04-troubleshooting/Screenshot%202026-04-18%20161520.png)
+
 3. Re-ran the logon script — drive mapped successfully
 
 ![Accounting drive success](screenshots/04-troubleshooting/Screenshot%202026-04-18%20161547.png)
@@ -62,9 +64,13 @@ files or folders inside it.
 ### Investigation
 - Doubled checked the HR folder NTFS permissions weren't inherited from the parent folder with `Everyone → Read`
 - Confirmed the HR folder NTFS permissions showed HR → Full Control 
+
 ![NTFS permissions of HR folder](screenshots/04-troubleshooting/Screenshot%202026-04-18%20172220.png)
+
 - Checked Group policy was applied successfully and HR John Davidson was able to see HR drive
+
 ![HR gpresult screenshot](screenshots/04-troubleshooting/Screenshot%202026-04-18%20171936.png)
+
 - Realized to check the Share permissions and found `Everyone → Read` only.
 
 ### Root Cause
@@ -81,7 +87,9 @@ NTFS Full Control grant.
    Permissions**
 2. Removed `Everyone → Read`
 3. Added `HR Security Group → Full Control` at the Share permission level
+
 ![updated share permissions on HR](screenshots/04-troubleshooting/Screenshot%202026-04-18%20174545.png)
+
 4. HR member was then able to create files and folders successfully
 
 ![Mapped drive successful](screenshots/04-troubleshooting/Screenshot%202026-04-18%20174732.png)
@@ -160,11 +168,11 @@ the domain policy before account creation.
 
 | Validation Point | Method | Status | Evidence |
 |---|---|---|---|
-| AD DS role running | Server Manager | ✅ | [Screenshot](screenshots/02-ad-install/adds-running.png) |
-| OUs created correctly | ADUC | ✅ | [Screenshot](screenshots/02-ad-install/ouStructure.png) |
-| Users created and enabled | ADUC | ✅ | [Screenshot](screenshots/users-enabled.png) |
-| Drive mapping working for Accounting | Logon script test | ✅ | [Accounting drive success](screenshots/04-troubleshooting/Screenshot%202026-04-18%20161547.png) |
-| Security groups created and populated | ADUC → Group Members | ✅ | [Screenshot](screenshots/02-ad-install/Security_groups.png) |
+| AD DS role running | Server Manager | ✅ | [c:\Users\hsdoo\OneDrive\Pictures\Screenshots\Screenshot 2026-04-18 111348.png](screenshots/04-troubleshooting/adds-running.png) |
+| OUs created correctly | ADUC | ✅ | [OU structure in ADUC](screenshots/02-ad-install/ouStructure.png) |
+| Users created and enabled | ADUC | ✅ | [Users enabled in ADUC](screenshots/04-troubleshooting/bulkusers.png) |
+| Drive mapping working for Accounting | Logon script test | ✅ | [Successful drive mapping](screenshots/04-troubleshooting/Screenshot%202026-04-18%20161547.png) |
+| Security groups created and populated | ADUC → Group Members | ✅ | [Security Groups in ADUC](screenshots/02-ad-install/Security_groups.png) + [_Groups OU with members assigned](screenshots/04-troubleshooting/users-in-accounting.png)|
 | GPP drive map visible to HR users | Client login verification | ✅ | [Mapped drive visible](screenshots/04-troubleshooting/HRdrivevisible.png) |
 | HR shared drive write access confirmed | File creation test on client | ✅ | [Mapped drive successful](screenshots/04-troubleshooting/Screenshot%202026-04-18%20174732.png) |
 
