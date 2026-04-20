@@ -4,7 +4,11 @@
 # Active Directory Installation & Configuration
 
 ## Overview
-The two VM's, the domain controller (DC-1) and the client computer (Client-1) were deployed and AD DS was promoted on DC-1 in order to activate the Active Directory and it's services on the domain controller.
+This phase covers the installation of Active Directory Domain Services 
+on DC-1, domain promotion, and the full configuration of the directory 
+structure — including a scalable multi-branch OU design, RBAC-based 
+security groups, bulk user provisioning via PowerShell, and domain-wide 
+password and lockout policy enforcement through Group Policy.
 
 ## AD DS Role Installation
 ### Role Configuration
@@ -18,7 +22,7 @@ The two VM's, the domain controller (DC-1) and the client computer (Client-1) we
 - **Forest/Domain Functional Level:** Default (because it's already the highest available)
 - **DNS:** Configured on DC during promotion
 
-![AD DS installed](screenshots/02-ad-install/promotionwizard.png)
+![Domain promotion wizard completion](screenshots/02-ad-install/promotionwizard.png)
 
 ---
 
@@ -184,16 +188,19 @@ Add-ADGroupMember -Identity "Accounting" -Members bmartinez
 | Account Lockout Threshold | 5 attempts | Brute force mitigation |
 | Lockout Duration | 30 minutes | Balance security/helpdesk load |
 
-![AD DS installed](screenshots/02-ad-install/gpopassword.png)
-![AD DS installed](screenshots/02-ad-install/gpoacc.png)
+![GPO password policy settings](screenshots/02-ad-install/gpopassword.png)
+![GPO account lockout settings](screenshots/02-ad-install/gpoacc.png)
 
 
 ## Validation
-![AD DS installed](screenshots/02-ad-install/gpresult.png)
+Ran `gpresult /r` on DC-1 to confirm the Default Domain Policy was 
+applied and password/lockout settings were enforced at the domain level.
 
+![gpresult output confirming policy applied to DC-1](screenshots/02-ad-install/gpresult.png)
 
-**‼️What I Learned‼️**
-- Users must be placed in the correct OU for policy targeting
-- Access is granted through **group membership**, not OU placement
-- Password and lockout policies are enforced via Group Policy
-
+## Key Takeaways
+- Users must be placed in the correct OU for targeted GPO application
+- Access is granted through group membership, not OU placement — 
+  this is the foundation of RBAC 
+- Password and lockout policies enforced via GPO apply domain-wide 
+  and cannot be bypassed at the user level

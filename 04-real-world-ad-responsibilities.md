@@ -1,14 +1,23 @@
 
-![picture](/screenshots/banner3.png)
+![banner](/screenshots/banner3.png)
 
 # Real-world Active Directory Responsibilities
+
+## Overview
+This phase covers real-world Active Directory administration tasks 
+including drive mapping via logon script and Group Policy Preferences, 
+file share security through NTFS and Share permission management, and 
+delegated password reset permissions to the Helpdesk group following 
+the principle of least privilege.
+
 ## Drive Mapping
 ### Logon Script (SYSVOL)
 
 Created a PowerShell logon script stored in SYSVOL, ensuring availability to all domain users.
   
-**Note:**
-You must create the folder you want to share first and go to Properties to share the folder in order to create the share path of the folder
+> **Prerequisites:** The target folder must be created and shared before 
+> the script runs. Failure to do this was documented in 
+> [Issue #1 of the Troubleshooting file](05-troubleshooting.md).
 
 ``` Powershell
 $DriveLetter = "H"
@@ -34,21 +43,23 @@ if (!$existingDrive) {
 }
 
 ```
-![map_drives](/screenshots/05-extra/drivemapscript.png)
+![drive mapping logon script with validation](/screenshots/05-extra/drivemapscript.png)
 
 ### Group Policy Preference
 Also implemented drive mapping using Group Policy Preferences to improve reliability and troubleshooting because GPP can be configured to apply drive mappings asynchronously, meaning it'll persist across reboots and it runs after logon. Plus logon scripts are considered legacy. 
 
+Created a new GPO and linked it to the Users in Los_Angeles_CA OU:
+![Create GPO and linked to OU](screenshots/05-extra/creategpo.png)
 
-![map_drives](screenshots/05-extra/creategpo.png)
+Configured the drive mapping with the correct share path and drive letter:
+![Properties of map drives GPO](screenshots/05-extra/mapdrives3.png)
 
-![map_drives](screenshots/05-extra/mapdrives3.png)
+Applied item-level targeting to restrict the mapping to HR security group members only:
+![Targeting editor](screenshots/05-extra/map_drives4.png)
 
-![map_drives](screenshots/05-extra/map_drives4.png)
+Verified GPO application using gpupdate /force and confirmed mapped drive behavior after user logon:
 
-Verified GPO application using gpupdate /force and confirmed mapped drive behavior after user logon
-
-![map_drives](screenshots/05-extra/confirmdrivesharegpo.png)
+![gpresult GPO validation](screenshots/05-extra/confirmdrivesharegpo.png)
 
 ## File Share Security (NTFS vs Share Permissions)
 
@@ -66,8 +77,14 @@ Verified GPO application using gpupdate /force and confirmed mapped drive behavi
 
 Delegated password reset permissions to the Helpdesk group using the Delegation of Control Wizard.
 
-![Delegation1](/screenshots/05-extra/delegation1.png)
+![Delegation of control wizard](/screenshots/05-extra/delegation1.png)
 
-![Delegation2](/screenshots/05-extra/delegation2.png)
+![Delegation of control wizard tasks](/screenshots/05-extra/delegation2.png)
 
 This allows Helpdesk staff to perform common tasks without full administrative rights, following the **principle of least privilege**.
+
+## Future Improvements
+- Implement Fine-Grained Password Policies (FGPP)
+- Add service accounts with scoped permissions
+- Centralize logging and auditing
+- Automate user onboarding with CSV-based PowerShell scripts
