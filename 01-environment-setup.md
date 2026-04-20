@@ -47,7 +47,7 @@ All lab resources were deployed to a single Resource Group in North Central US t
 
 
 ### Domain Controller VM (Windows Server 2022)
-- **Image:** Windows Server 2022 Datacenter
+- **Image:** Windows Server 2022 
 - **VM name:** DC-1
 - **Static Private IP:** 10.0.0.4
 - **Virtual Network:** ActiveDirectoryVNet

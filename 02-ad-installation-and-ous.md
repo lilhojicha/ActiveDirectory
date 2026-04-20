@@ -193,10 +193,10 @@ Add-ADGroupMember -Identity "Accounting" -Members bmartinez
 
 
 ## Validation
-Ran `gpresult /r` on DC-1 to confirm the Default Domain Policy was 
+Ran `gpresult /r` on Client-1 to confirm the Default Domain Policy was 
 applied and password/lockout settings were enforced at the domain level.
 
-![gpresult output confirming policy applied to DC-1](screenshots/02-ad-install/gpresult.png)
+![gpresult output confirming policy applied to Client-1](screenshots/02-ad-install/gpresult.png)
 
 ## Key Takeaways
 - Users must be placed in the correct OU for targeted GPO application
