@@ -168,7 +168,7 @@ the domain policy before account creation.
 
 | Validation Point | Method | Status | Evidence |
 |---|---|---|---|
-| AD DS role running | Server Manager | ✅ | [c:\Users\hsdoo\OneDrive\Pictures\Screenshots\Screenshot 2026-04-18 111348.png](screenshots/04-troubleshooting/adds-running.png) |
+| AD DS role running | Server Manager | ✅ | [AD DS active in Server Manager](screenshots/04-troubleshooting/adds-running.png) |
 | OUs created correctly | ADUC | ✅ | [OU structure in ADUC](screenshots/02-ad-install/ouStructure.png) |
 | Users created and enabled | ADUC | ✅ | [Users enabled in ADUC](screenshots/04-troubleshooting/bulkusers.png) |
 | Drive mapping working for Accounting | Logon script test | ✅ | [Successful drive mapping](screenshots/04-troubleshooting/Screenshot%202026-04-18%20161547.png) |
