@@ -137,9 +137,7 @@ Security groups were stored in a centralized OU to simplify access management.
     └── Accounting
 
 
-![Security_groups](screenshots/Security_groups.png)
-
-
+![Security_groups](screenshots/02-ad-install/securitygroups.png)
 
 
 ### Group Membership

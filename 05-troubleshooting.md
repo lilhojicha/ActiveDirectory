@@ -33,13 +33,19 @@ did not yet exist as a network share.
 1. Right-clicked the Accounting folder → **Properties → Sharing tab**
 2. Selected **Share** and added the appropriate security group with 
    correct permissions
+   ![Accounting shared](screenshots/04-troubleshooting/Screenshot%202026-04-18%20161520.png)
 3. Re-ran the logon script — drive mapped successfully
 
+![Accounting drive success](screenshots/04-troubleshooting/Screenshot%202026-04-18%20161547.png)
+
 ### Lesson Learned
-Creating a folder locally does not automatically make it a network share. 
-UNC paths require the share to be explicitly configured. In production, 
-this would be caught by validating share existence before deploying 
-logon scripts.
+Always validate the share first before deploying logon scripts prevents failed mappings at login.
+Adding a pre-check using Test-Path ensures the script fails with a clear error.
+By adding this to the script, if it returns false deployment stops.
+
+```powershell
+Test-Path "\\Server\Share"
+```
 
 ---
 
@@ -51,12 +57,15 @@ setting NTFS permissions to grant the HR security group Full Control on
 the HR folder, one HR member could see the drive but could not create 
 files or folders inside it.
 
+![Folder Access Denied](screenshots/04-troubleshooting/Screenshot%202026-04-18%20172346.png)
+
 ### Investigation
+- Doubled checked the HR folder NTFS permissions weren't inherited from the parent folder with `Everyone → Read`
 - Confirmed the HR folder NTFS permissions showed HR → Full Control 
-- Noticed the HR folder had a **parent folder** that was not shared
-- Checked parent folder NTFS permissions: `Everyone → Read` only
-- Added HR group to the parent folder with **Read & List** permissions
-- Tested again — issue persisted
+![NTFS permissions of HR folder](screenshots/04-troubleshooting/Screenshot%202026-04-18%20172220.png)
+- Checked Group policy was applied successfully and HR John Davidson was able to see HR drive
+![HR gpresult screenshot](screenshots/04-troubleshooting/Screenshot%202026-04-18%20171936.png)
+- Realized to check the Share permissions and found `Everyone → Read` only.
 
 ### Root Cause
 NTFS permissions on the HR folder were correct, but the **Share permissions 
@@ -65,12 +74,17 @@ and NTFS permissions both apply, and Windows enforces whichever is **more
 restrictive** — in this case, the Share permissions were overriding the 
 NTFS Full Control grant.
 
+![Share Permissions of HR folder](screenshots/04-troubleshooting/Screenshot%202026-04-18%20174352.png)
+
 ### Resolution
 1. Opened the HR folder → **Properties → Sharing → Advanced Sharing → 
    Permissions**
 2. Removed `Everyone → Read`
 3. Added `HR Security Group → Full Control` at the Share permission level
+![updated share permissions on HR](screenshots/04-troubleshooting/Screenshot%202026-04-18%20174545.png)
 4. HR member was then able to create files and folders successfully
+
+![Mapped drive successful](screenshots/04-troubleshooting/Screenshot%202026-04-18%20174732.png)
 
 ### Lesson Learned
 Both Share permissions and NTFS permissions must be configured correctly — 
@@ -80,11 +94,12 @@ exclusively through NTFS permissions to avoid this conflict.
 
 ---
 
-## Issue #3: Permissions (Run as Admin)
+## Issue #3: Password complexity + disabled account recovery
 
 ### Symptom
-Running the user/group creation script returned an access denied error 
-when attempting to create new AD users.
+Script failed mid-execution during the first New-ADUser call. 
+PowerShell returned a password complexity error, halting before 
+remaining users were created.
 
 ![Error Message](screenshots/04-troubleshooting/errormessage.png)
 
@@ -106,8 +121,10 @@ New-ADUser -Name "Chris Walker" -GivenName Chris -Surname Walker -SamAccountName
 The script halted, leaving `ajohnson` created in AD but in a 
 **disabled state**.
 
+![ajohnson disabled](screenshots/04-troubleshooting/Screenshot%202026-04-18%20170618.png)
+
 ### Investigation
-- Navigated to **Group Policy Management → Default Domain Policy → 
+- Error message pointed to an issue in the password requirements so I navigated to **Group Policy Management → Default Domain Policy → 
   Password Policy**
 - Reviewed the configured password requirements (minimum length, 
   complexity rules)
@@ -137,34 +154,24 @@ A better practice is to define a compliant default password in the script
 for lab use, or implement a pre-check function that validates against 
 the domain policy before account creation.
 
-## Issue #4: Password complexity + disabled account recovery
-
-### Symptoms
-### Investigation
-### Root Cause 
-### Resolution
-### Lesson Learned
-
-
-
 ---
 
 ## Final Lab Validation
 
-| Validation Point | Method | Status |
-|---|---|---|
-| AD DS role running | Server Manager | ✅ |
-| OUs created correctly | ADUC | ✅ |
-| Users created and enabled | ADUC | ✅ |
-| Security groups created and populated | ADUC → Group Members | ✅ |
-| Drive mapping working for Accounting | Logon script test | ✅ |
-| HR shared drive write access confirmed | File creation test on client | ✅ |
-| GPP drive map visible to HR users | Client login verification | ✅ |
+| Validation Point | Method | Status | Evidence |
+|---|---|---|---|
+| AD DS role running | Server Manager | ✅ | [Screenshot](screenshots/02-ad-install/adds-running.png) |
+| OUs created correctly | ADUC | ✅ | [Screenshot](screenshots/02-ad-install/ouStructure.png) |
+| Users created and enabled | ADUC | ✅ | [Screenshot](screenshots/users-enabled.png) |
+| Drive mapping working for Accounting | Logon script test | ✅ | [Accounting drive success](screenshots/04-troubleshooting/Screenshot%202026-04-18%20161547.png) |
+| Security groups created and populated | ADUC → Group Members | ✅ | [Screenshot](screenshots/02-ad-install/Security_groups.png) |
+| GPP drive map visible to HR users | Client login verification | ✅ | [Mapped drive visible](screenshots/04-troubleshooting/HRdrivevisible.png) |
+| HR shared drive write access confirmed | File creation test on client | ✅ | [Mapped drive successful](screenshots/04-troubleshooting/Screenshot%202026-04-18%20174732.png) |
 
 ## Reflection
 This lab reinforced that Windows permission issues are rarely single-layered — 
 the Share/NTFS interaction in Issue #2 is a pattern I expect to encounter 
 regularly in production environments. The PowerShell errors strengthened my 
-understanding of AD account states and GPO enforcement timing. Next iteration 
+understanding of AD account states and GPO enforcement timing as well as best practices for coding. Next iteration 
 of this lab will include automating password complexity validation before 
 account creation and expanding the GPP drive mapping to additional departments.
