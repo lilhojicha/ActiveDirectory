@@ -1,11 +1,11 @@
 # Script that creates Branches with users, workstations, and laptops
-# OU_Branches
+# _Branches
 #         └── Las_Vegas
 #             ├── Users
 #             ├── Workstations
 #             └── Laptops
 
-$path = "OU=OU_Branches,DC=mydomain,DC=com"
+$path = "OU=_Branches,DC=mydomain,DC=com"
 $sub_ou = "Users", "Workstations", "Laptops"
 
 # here are the 20 most populous cities
