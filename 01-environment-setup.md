@@ -8,6 +8,7 @@ I've built a Windows Server 2022 Domain Controller and a Windows 10 Pro client c
 
 ## Lab Architecture
 
+This diagram shows the network layout used across both VMs in this lab.
 
 ![Network Topology](screenshots/01-setup/network.png)
 

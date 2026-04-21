@@ -1,7 +1,7 @@
 
 ![banner](/screenshots/banner3.png)
 
-# Real-world Active Directory Responsibilities
+# Real-world Active Directory Tasks
 
 ## Overview
 This phase covers real-world Active Directory administration tasks 

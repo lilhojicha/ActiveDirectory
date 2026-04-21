@@ -9,8 +9,6 @@ home lab build. Each entry includes the symptom, investigation process,
 root cause, and resolution — mirroring how issues are documented in 
 real IT environments.
 
----
-
 ## Issue #1: Drive Mapping Script Failing — Network Path Not Found
 
 ### Symptom
@@ -63,13 +61,15 @@ files or folders inside it.
 
 ### Investigation
 - Doubled checked the HR folder NTFS permissions weren't inherited from the parent folder with `Everyone → Read`
-- Confirmed the HR folder NTFS permissions showed HR → Full Control 
+- Confirmed the HR folder NTFS permissions showed `HR → Full Control` 
 
 ![NTFS permissions of HR folder](screenshots/04-troubleshooting/Screenshot%202026-04-18%20172220.png)
 
 - Checked Group policy was applied successfully and HR John Davidson was able to see HR drive
 
 ![HR gpresult screenshot](screenshots/04-troubleshooting/Screenshot%202026-04-18%20171936.png)
+
+![Mapped drive visible from HR member](screenshots/04-troubleshooting/HRdrivevisible.png)
 
 - Realized to check the Share permissions and found `Everyone → Read` only.
 
