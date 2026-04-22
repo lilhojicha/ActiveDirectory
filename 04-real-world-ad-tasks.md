@@ -71,6 +71,7 @@ Verified GPO application using gpupdate /force and confirmed mapped drive behavi
 - Here is an example of applying NTFS and share permissions on the mapped drive J: for only HR users
 
 | Layer | Who | Permission | Purpose | 
+|---|---|---|---|
 | Share | Everyone | Full Control | Opens the door for everyone | 
 | NTFS | HR | Full Control | HR can read, write, modify | 
 | NTFS | Admins | Full Control | Full administrative access |
