@@ -68,13 +68,28 @@ Verified GPO application using gpupdate /force and confirmed mapped drive behavi
 
 - Share permissions were kept permissive
 - NTFS permissions enforced access control
+- Here is an example of applying NTFS and share permissions on the mapped drive J: for only HR users
+
+| Layer | Who | Permission | Purpose | 
+| Share | Everyone | Full Control | Opens the door for everyone | 
+| NTFS | HR | Full Control | HR can read, write, modify | 
+| NTFS | Admins | Full Control | Full administrative access |
+| NTFS | Everyone | None | Everyone else blocked |
+
+![NTFS permissions on HR folder](screenshots/04-troubleshooting/Screenshot%202026-04-18%20172220.png)
+
+- Share permissions were set to `Everyone -> Full control`
+
+![Share permissions on HR folder](screenshots/05-extra/sharepermissions.png)
 
 **Why**
-
 - NTFS permissions are granular
 - Support inheritance
 - Apply locally and over the network
 - Align with enterprise security best practices
+
+These were some issues I came across with NTFS vs Share permissions
+> [Issue #2 of the Troubleshooting file](05-troubleshooting.md).
 
 ## Delegated Password Reset Permissions to Helpdesk
 
